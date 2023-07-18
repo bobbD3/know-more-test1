@@ -129,7 +129,7 @@ const DoctorPage = () => {
                 ))}
               </select>
             </div>
-            <div>
+            {/* <div>
               <div>Language</div>
               <select className='doctor_dropdown_terms' name='language' value={formState.language} onChange={handleChange}>
                 {languages.map((language, index) => (
@@ -138,7 +138,7 @@ const DoctorPage = () => {
                   </option>
                 ))}
               </select>
-            </div>
+            </div> */}
             <div>
               <div>Verified Email</div>
               <select className='doctor_dropdown_terms' name='confirmEmail' value={formState.confirmEmail} onChange={handleChange}>
@@ -151,7 +151,7 @@ const DoctorPage = () => {
             </div>
           </div>
           <div className='doctor_locations_list'>
-            <div>Locations</div>
+            <div>Company</div>
             <button className='button-classic button-classic-doctors-add' type='button'>
               Add
             </button>

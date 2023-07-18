@@ -209,7 +209,7 @@ table {
 
 .doctor_title_dropdown_big {
   width: 442px;
-  height: 56px;
+  height: 32px;
 }
 
 .doctor_title_dropdown_state {
@@ -457,7 +457,7 @@ table {
   background-position: center;
 }
 .video-container {
-  margin-top: 220px;
+  margin-top: 85px;
   margin-left: 140px;
 }
 .video-form {
@@ -466,7 +466,7 @@ table {
   align-items: center;
   text-align: center;
   margin-bottom: 40px;
-  margin-right: 85px;
+  margin-right: 275px;
   display: flex;
   justify-content: space-between;
 }
@@ -474,7 +474,7 @@ table {
 .thumbnail-upload {
   width: 100px;
   height: 100px;
-  margin-right: 40px;
+  /* margin-right: 40px; */
   background-color: #d9d9d9;
   border: none;
   display: flex;
@@ -499,20 +499,21 @@ table {
 
 .video_edit_veritcal_scroll {
   margin-top: 75px;
-  margin-right: 75px;
+  margin-right: 275px;
   overflow-y: auto;
   max-height: 370px;
 }
 
 .video-form-scroll {
-  margin-top: 70px;
-  display: flex;
-  align-items: center;
+  /* margin-top: 70px; */
+  margin-bottom: 20px;
+  /* margin-right: 500px; */
+  display: grid;
+  grid-template-columns: repeat(10, 1fr); /* Adjust the number of columns as needed */
+  gap: 10px; /* Set the desired gap between items */
+  justify-items: center; /* Centers items horizontally within each grid cell */
+  align-items: center; /* Centers items vertically within each grid cell */
   text-align: center;
-  margin-bottom: 40px;
-  margin-right: 500px;
-  display: flex;
-  justify-content: space-between;
 }
 
 .video-edit-label {
@@ -599,13 +600,24 @@ table {
 .library-edit-label input {
   margin-top: 5px;
   width: 442px;
-  height: 32px;
+  height: 21px;
   margin-bottom: 52px;
+  border: none;
+  border: 1px solid gray;
 }
 
 .library-edit-label-package {
   display: flex;
   justify-content: space-between;
+}
+
+.library-edit-label-package input {
+  margin-top: 5px;
+  width: 442px;
+  height: 21px;
+  margin-bottom: 52px;
+  border: none;
+  border: 1px solid gray;
 }
 
 .button-edit-library-add {

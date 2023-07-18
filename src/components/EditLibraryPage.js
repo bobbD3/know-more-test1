@@ -89,7 +89,9 @@ const EditLibraryPage = () => {
         {videoPackages.map((videoPackage, packageIndex) => (
           <div key={packageIndex}>
             <div className='library-edit-label-package'>
-              <div>Name of Package</div>
+              <div>
+                <input type='text' placeholder='Name your package' />
+              </div>
               <div>
                 <button
                   className='button-classic'
