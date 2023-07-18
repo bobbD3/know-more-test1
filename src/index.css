@@ -510,7 +510,7 @@ table {
   /* margin-right: 500px; */
   display: grid;
   grid-template-columns: repeat(10, 1fr); /* Adjust the number of columns as needed */
-  gap: 10px; /* Set the desired gap between items */
+  gap: 18px; /* Set the desired gap between items */
   justify-items: center; /* Centers items horizontally within each grid cell */
   align-items: center; /* Centers items vertically within each grid cell */
   text-align: center;
