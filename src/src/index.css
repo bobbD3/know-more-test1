@@ -1,0 +1,711 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+th {
+  padding-left: 60px;
+  font-weight: bold;
+  text-align: left;
+  padding-bottom: 20px;
+}
+td {
+  padding-top: 12px;
+  padding-left: 60px;
+  text-align: left;
+}
+
+table {
+  margin-top: 100px;
+}
+/* Buttons */
+
+.button-classic {
+  height: 23px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  background-color: #d9d9d9;
+  border: none;
+  border-radius: 5px;
+  padding: 4px, 10px, 4px, 10px;
+}
+.button-general {
+  height: 35px;
+  max-width: 125px;
+  min-width: 65px;
+  color: white;
+  background-color: #9d9d9d;
+  border-radius: 10px;
+  border: none;
+  text-align: center;
+}
+
+.user-add-button-possition {
+  position: absolute;
+  left: 86%;
+  top: 8%;
+}
+
+.user-add-button-possition-edit {
+  z-index: 99;
+  position: absolute;
+  left: 80.5%;
+}
+
+.user-add-button-possition-remove {
+  position: absolute;
+  left: 83%;
+}
+
+/* NavBar */
+
+.navBar ul {
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+  padding: 0;
+}
+
+.navBar ul li {
+  margin: 0 10px;
+}
+
+.navBar ul li a {
+  color: black;
+  text-decoration: none;
+}
+
+.navBar ul li a.active {
+  color: red;
+}
+
+/* Login Page */
+
+.login-form {
+  background-color: #d9d9d9;
+  font-weight: 400;
+  font-size: 12px;
+  position: absolute;
+  width: 626px;
+  height: 452px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 20px;
+}
+
+.login-input {
+  font-size: 12px;
+  width: 442px;
+  height: 32px;
+  top: 50%;
+  left: 50%;
+  transform: translate(20%, 10%);
+  border: none;
+}
+
+.login-button {
+  color: white;
+  background-color: #9d9d9d;
+  width: fit-content;
+  height: fit-content;
+  border-radius: 10px;
+  border: none;
+  padding: 10px 20px;
+  margin-left: -100px;
+  gap: 10px;
+  position: absolute;
+  top: calc(50% + 56px); /* Position below the password input */
+  left: calc(50% + 221px); /* Position on the right of the password input */
+}
+
+.login-name {
+  font-size: 12px;
+  position: relative;
+  margin-left: 90px;
+}
+.login-password {
+  font-size: 12px;
+  position: relative;
+  margin-left: 90px;
+}
+
+.login-form-content {
+  margin-top: 100px;
+}
+
+/* User Page*/
+
+.users-select {
+  display: flex;
+  align-self: flex-end;
+}
+
+/* Edit User Page */
+
+.edit-user-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.edit-user-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* this will create 2 columns */
+  grid-gap: 20px 40px; /* adjust this to control the space between your inputs */
+  width: 60%; /* adjust this to control the form width */
+}
+
+.edit-user-form-input {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-user-form input {
+  margin-top: 5px;
+}
+
+.edit-user-form-label {
+  margin-bottom: 10px;
+}
+
+.edit-user-form-input {
+  width: 440px;
+  height: 80px;
+}
+
+/* Doctor User Page */
+
+.doctorForm {
+  margin-top: 45px;
+  margin-left: 180px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* this will create 2 columns */
+  grid-gap: 20px 200px; /* adjust this to control the space between your inputs */
+  width: 60%;
+  color: #000;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.doctorForm div {
+  margin-bottom: 8px;
+  margin-top: 30px;
+}
+
+.doctor_title_dropdown_title {
+  width: 104px;
+  height: 32px;
+}
+
+.doctor_title_dropdown_big {
+  width: 442px;
+  height: 32px;
+}
+
+.doctor_title_dropdown_state {
+  width: 182px;
+  height: 38px;
+  margin-right: 11px;
+}
+
+.doctor_title_dropdown_zip {
+  width: 249px;
+  height: 32px;
+}
+
+.doctor_dropdown_terms {
+  width: 104px;
+  height: 32px;
+  margin-right: 30px;
+}
+
+.doctor_locations_list {
+  width: 506px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: -30px;
+  margin-left: 5px;
+}
+
+.doctor_library {
+  margin-left: 5px;
+}
+.doctor_title_dropdown_library {
+  width: 495px;
+  height: 32px;
+  margin-top: -30px !important;
+}
+.users_address2 {
+  display: flex;
+  margin-top: -30px !important;
+}
+
+.users_verificaiton {
+  display: flex;
+}
+
+.users_list_box {
+  margin-top: -10px !important;
+  border: 1px solid black;
+  width: 506px;
+}
+
+.position-doctor-cancel {
+  margin-left: 350px;
+}
+
+.position-doctor-save {
+  margin-left: 22px;
+}
+
+.button-general-doctor-container {
+  display: flex;
+}
+
+.position-company-cancel {
+  margin-left: 350px;
+}
+
+.position-company-save {
+  margin-left: 22px;
+}
+
+.button-classic-doctors-add {
+  margin-top: 25px;
+}
+
+/* Patiant User Page */
+
+.patiantPageForm {
+  margin-top: 45px;
+  margin-left: 180px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* this will create 2 columns */
+  grid-gap: 20px 40px; /* adjust this to control the space between your inputs */
+  width: 60%;
+}
+
+.patientForm {
+  margin-top: 45px;
+  margin-left: 180px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* this will create 2 columns */
+  grid-gap: 20px 200px; /* adjust this to control the space between your inputs */
+  width: 60%;
+  color: #000;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.patientForm div {
+  margin-bottom: 8px;
+  margin-top: 30px;
+}
+
+.patient_title_dropdown_title {
+  width: 104px;
+  height: 32px;
+}
+
+.patient_title_dropdown_big {
+  width: 442px;
+  height: 56px;
+}
+
+.patient_title_dropdown_state {
+  width: 182px;
+  height: 38px;
+  margin-right: 11px;
+}
+
+.patient_title_dropdown_zip {
+  width: 249px;
+  height: 32px;
+}
+
+.patient_dropdown_terms {
+  width: 104px;
+  height: 32px;
+  margin-right: 30px;
+}
+
+.patient_locations_list {
+  width: 506px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: -30px;
+  margin-left: 5px;
+}
+
+.patient_library {
+  margin-left: 5px;
+}
+.patient_title_dropdown_library {
+  width: 495px;
+  height: 32px;
+  margin-top: -30px !important;
+}
+.users_address2 {
+  display: flex;
+  margin-top: -30px !important;
+}
+
+.users_verificaiton {
+  display: flex;
+}
+
+.users_list_box {
+  margin-top: -10px !important;
+  border: 1px solid black;
+  width: 506px;
+}
+
+.button-general-patient-container {
+  display: flex;
+}
+.button-general-patient-save {
+  margin-left: 22px;
+}
+
+.button-general-patient-cancel {
+  margin-left: 350px;
+}
+
+.button-classic-doctors-add {
+  margin-top: 25px;
+}
+
+/* Company Edit Page*/
+
+.company_form {
+  margin-top: 45px;
+  margin-left: 180px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* this will create 2 columns */
+  grid-gap: 20px 200px; /* adjust this to control the space between your inputs */
+  width: 60%;
+  color: #000;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.company_form div {
+  margin-bottom: 8px;
+  margin-top: 30px;
+}
+
+.company_title_dropdown_big {
+  width: 442px;
+  height: 32px;
+}
+
+.button-general-company-send {
+  margin-left: 1180px;
+  margin-right: 22px;
+}
+
+.company_form_dropdown_state {
+  margin-top: -30px !important;
+  display: flex;
+}
+
+.company_title_dropdown_state {
+  width: 182px;
+  height: 38px;
+  margin-right: 11px;
+}
+
+.company_title_dropdown_zip {
+  width: 249px;
+  height: 32px;
+}
+
+.company_form_doctor_checkboxes {
+  width: 506px;
+  height: 214px;
+  border: 1px solid black;
+}
+
+.company_form_patient_checkboxes {
+  width: 506px;
+  height: 214px;
+  border: 1px solid black;
+}
+
+.company_form_buttons {
+  display: flex;
+}
+
+/* Edit Video Page*/
+
+.video-thumbnail-container {
+  background-size: cover;
+  background-position: center;
+}
+.video-container {
+  margin-top: 85px;
+  margin-left: 140px;
+}
+.video-form {
+  margin-top: 70px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 40px;
+  margin-right: 275px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.thumbnail-upload {
+  width: 100px;
+  height: 100px;
+  /* margin-right: 40px; */
+  background-color: #d9d9d9;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+}
+
+.video-upload {
+  width: 100px;
+  height: 100px;
+  margin-right: 51px;
+  background-color: #d9d9d9;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+}
+
+.video_edit_veritcal_scroll {
+  margin-top: 75px;
+  margin-right: 275px;
+  overflow-y: auto;
+  max-height: 370px;
+}
+
+.video-form-scroll {
+  /* margin-top: 70px; */
+  margin-bottom: 20px;
+  /* margin-right: 500px; */
+  display: grid;
+  grid-template-columns: repeat(10, 1fr); /* Adjust the number of columns as needed */
+  gap: 18px; /* Set the desired gap between items */
+  justify-items: center; /* Centers items horizontally within each grid cell */
+  align-items: center; /* Centers items vertically within each grid cell */
+  text-align: center;
+}
+
+.video-edit-label {
+  display: inline-flex;
+}
+
+.video-edit-label-name {
+  display: grid;
+  justify-items: start;
+  margin-right: 42px;
+}
+
+.video-edit-label-name input {
+  margin-top: 5px;
+  width: 442px;
+  height: 32px;
+}
+
+.video-edit-label-prescribed {
+  display: grid;
+  justify-items: start;
+}
+
+.video-edit-label-prescribed select {
+  margin-top: 5px;
+  width: 182px;
+  height: 38px;
+}
+
+.video-edit-label-url {
+  display: grid;
+  justify-items: start;
+}
+
+.video-edit-label-url input {
+  margin-top: 5px;
+  width: 442px;
+  height: 32px;
+}
+.button-general-video-send {
+  margin-bottom: 216px;
+  margin-top: 60px;
+  margin-left: 1300px;
+  margin-right: 22px;
+}
+/*  Library Page*/
+.library-td-possition td {
+  padding-bottom: 80px;
+}
+
+/* Edit Library Page*/
+
+.modal-library-add-video-container {
+  display: flex;
+}
+.video-thumbnail-container-modal {
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 30px;
+  margin-right: 30px;
+}
+
+.library-edit-add-container {
+  margin-top: 45px;
+  margin-left: 180px;
+}
+
+.library-edit-add-buttons {
+  margin-top: 120px;
+  display: flex;
+  justify-content: end;
+}
+
+.button-general-library-send {
+  margin-left: 920px;
+  margin-right: 22px;
+}
+
+.library-edit-label {
+  display: grid;
+  justify-items: start;
+}
+
+.library-edit-label input {
+  margin-top: 5px;
+  width: 442px;
+  height: 21px;
+  margin-bottom: 52px;
+  border: none;
+  border: 1px solid gray;
+}
+
+.library-edit-label-package {
+  display: flex;
+  justify-content: space-between;
+}
+
+.library-edit-label-package input {
+  margin-top: 5px;
+  width: 442px;
+  height: 21px;
+  margin-bottom: 52px;
+  border: none;
+  border: 1px solid gray;
+}
+
+.button-edit-library-add {
+  margin-bottom: 23px;
+}
+
+.library-add-video-button {
+  margin-left: 35%;
+  margin-top: 35%;
+}
+
+.ReactModal__Overlay {
+  z-index: 2;
+}
+
+/* Carousel*/
+
+.videos-container {
+  width: 1100px;
+}
+.embla_container_max {
+  position: relative;
+  padding-left: 50px;
+  padding-right: 50px;
+  width: 967px;
+}
+.embla {
+  width: 967px;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.embla_button {
+  z-index: 1;
+  position: absolute;
+  background-color: transparent;
+  border: none;
+  padding: 1em;
+  font-size: 1.5em;
+}
+
+.embla_button:nth-child(1) {
+  top: 20%;
+  left: -2%;
+  transform: translateY(-50%);
+}
+
+.embla_button:nth-child(3) {
+  top: 20%;
+  left: 96%;
+  transform: translateY(-50%);
+}
+
+.embla__viewport {
+  width: 85%;
+  height: 100%;
+}
+
+.embla__container {
+  display: flex;
+  width: 100%;
+  height: 200px;
+  margin-left: 20px;
+}
+
+.embla__slide {
+  height: 74px;
+  width: 109px;
+  position: relative;
+  border-radius: 5px;
+  flex: 0 0 auto;
+  width: calc((100% - 0rem) / 8); /* Adjust here for the number of slides you want to show */
+  margin-bottom: 10px;
+  margin-left: 12px;
+  background: rgb(23, 192, 200);
+  background-image: url(''); /* Will be overridden by inline styles */
+  background-size: cover;
+  background-position: center;
+}
+
+.embla__slide__inner {
+  padding: 1em;
+  text-align: center;
+}
+
+.embla__slide__content {
+  margin: auto;
+  margin-top: 60px;
+}
