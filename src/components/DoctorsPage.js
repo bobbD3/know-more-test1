@@ -25,7 +25,6 @@ const roles = ['Doctor', 'Nurse', 'Pharmacist', 'Receptionist', 'Admin']
 const states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louis']
 const titles = ['Mr', 'Ms', 'Dr']
 const confirmationOptions = ['Yes', 'No']
-const languages = ['English', 'Non-English']
 const library = ['New Library 1	', 'New Library 2', 'New Library 3']
 
 const DoctorPage = () => {
@@ -107,7 +106,7 @@ const DoctorPage = () => {
           <div>Mobile</div>
           <input className='doctor_title_dropdown_big' name='mobile' value={formState.mobile} onChange={handleChange} placeholder='Mobile' />
         </div>
-        <div>
+        <section>
           <div className='users_verificaiton'>
             <div>
               <div>Verified Mobile</div>
@@ -174,7 +173,7 @@ const DoctorPage = () => {
               </option>
             ))}
           </select>
-        </div>
+        </section>
 
         <button className='button-general ' type='submit'>
           Send Invite

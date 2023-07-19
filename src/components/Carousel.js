@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useCallback } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 
-const Carousel = ({ children }) => {
+const Carousel = ({ children, onDragEnd, droppableId }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false, slidesToScroll: 1 })
   const emblaApiRef = useRef(emblaApi)
 
@@ -15,7 +16,6 @@ const Carousel = ({ children }) => {
     }
   }, [children])
 
-  // Carousel scroll functions
   const scrollPrev = useCallback(() => {
     if (emblaApiRef.current) {
       emblaApiRef.current.scrollPrev()
@@ -34,7 +34,24 @@ const Carousel = ({ children }) => {
         {'<'}
       </button>
       <div className='embla__viewport' ref={emblaRef}>
-        <div className='embla__container'>{children}</div>
+        <DragDropContext onDragEnd={onDragEnd}>
+          <Droppable droppableId={droppableId} direction='horizontal'>
+            {provided => (
+              <div className='embla__container' ref={provided.innerRef} {...provided.droppableProps}>
+                {React.Children.map(children, (child, index) => (
+                  <Draggable key={child.key} draggableId={child.key} index={index}>
+                    {provided => (
+                      <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                        {child}
+                      </div>
+                    )}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
       </div>
       <button className='embla_button' onClick={scrollNext}>
         {'>'}

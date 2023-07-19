@@ -1,3 +1,8 @@
+:root {
+  --height: 23px;
+  --margin-top: 18px;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
@@ -24,6 +29,10 @@ td {
 table {
   margin-top: 100px;
 }
+
+input {
+  padding-left: 5px;
+}
 /* Buttons */
 
 .button-classic {
@@ -49,8 +58,8 @@ table {
 
 .user-add-button-possition {
   position: absolute;
-  left: 86%;
-  top: 8%;
+  left: 85.7%;
+  top: 12%;
 }
 
 .user-add-button-possition-edit {
@@ -59,11 +68,36 @@ table {
   left: 80.5%;
 }
 
+.user-add-button-possition-patient {
+  position: absolute;
+  left: 84.8%;
+  top: 12%;
+}
+
+.user-add-button-possition-doctor {
+  position: absolute;
+  left: 80%;
+  top: 12%;
+}
+
+.user-add-button-possition-edit option {
+  text-align: left;
+}
+
 .user-add-button-possition-remove {
   position: absolute;
   left: 83%;
 }
 
+.video-add-button-possition-edit {
+  position: absolute;
+  left: 84%;
+}
+
+.video-add-button-possition-remove {
+  position: absolute;
+  left: 86.2%;
+}
 /* NavBar */
 
 .navBar ul {
@@ -104,7 +138,7 @@ table {
 .login-input {
   font-size: 12px;
   width: 442px;
-  height: 32px;
+  height: var(--height);
   top: 50%;
   left: 50%;
   transform: translate(20%, 10%);
@@ -122,8 +156,8 @@ table {
   margin-left: -100px;
   gap: 10px;
   position: absolute;
-  top: calc(50% + 56px); /* Position below the password input */
-  left: calc(50% + 221px); /* Position on the right of the password input */
+  top: calc(50% + 56px);
+  left: calc(50% + 221px);
 }
 
 .login-name {
@@ -158,9 +192,9 @@ table {
 
 .edit-user-form {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* this will create 2 columns */
-  grid-gap: 20px 40px; /* adjust this to control the space between your inputs */
-  width: 60%; /* adjust this to control the form width */
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px 40px;
+  width: 60%;
 }
 
 .edit-user-form-input {
@@ -187,8 +221,8 @@ table {
   margin-top: 45px;
   margin-left: 180px;
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* this will create 2 columns */
-  grid-gap: 20px 200px; /* adjust this to control the space between your inputs */
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px 200px;
   width: 60%;
   color: #000;
   font-size: 12px;
@@ -199,33 +233,33 @@ table {
 
 .doctorForm div {
   margin-bottom: 8px;
-  margin-top: 30px;
+  margin-top: var(--margin-top);
 }
 
 .doctor_title_dropdown_title {
   width: 104px;
-  height: 32px;
+  height: var(--height);
 }
 
 .doctor_title_dropdown_big {
   width: 442px;
-  height: 32px;
+  height: var(--height);
 }
 
 .doctor_title_dropdown_state {
   width: 182px;
-  height: 38px;
+  height: 29px;
   margin-right: 11px;
 }
 
 .doctor_title_dropdown_zip {
   width: 249px;
-  height: 32px;
+  height: var(--height);
 }
 
 .doctor_dropdown_terms {
   width: 104px;
-  height: 32px;
+  height: var(--height);
   margin-right: 30px;
 }
 
@@ -241,8 +275,8 @@ table {
   margin-left: 5px;
 }
 .doctor_title_dropdown_library {
-  width: 495px;
-  height: 32px;
+  width: 508px;
+  height: var(--height);
   margin-top: -30px !important;
 }
 .users_address2 {
@@ -251,6 +285,7 @@ table {
 }
 
 .users_verificaiton {
+  margin-top: 0 !important;
   display: flex;
 }
 
@@ -260,28 +295,30 @@ table {
   width: 506px;
 }
 
+.users_list_box div {
+  font-size: 14px;
+  margin-left: 10px;
+}
+
 .position-doctor-cancel {
-  margin-left: 350px;
+  margin-left: 360px;
 }
 
 .position-doctor-save {
-  margin-left: 22px;
+  margin-left: 18px;
 }
 
 .button-general-doctor-container {
+  margin-top: 0px !important;
   display: flex;
 }
 
 .position-company-cancel {
-  margin-left: 350px;
+  margin-left: 355px;
 }
 
 .position-company-save {
   margin-left: 22px;
-}
-
-.button-classic-doctors-add {
-  margin-top: 25px;
 }
 
 /* Patiant User Page */
@@ -290,8 +327,8 @@ table {
   margin-top: 45px;
   margin-left: 180px;
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* this will create 2 columns */
-  grid-gap: 20px 40px; /* adjust this to control the space between your inputs */
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px 40px;
   width: 60%;
 }
 
@@ -299,8 +336,8 @@ table {
   margin-top: 45px;
   margin-left: 180px;
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* this will create 2 columns */
-  grid-gap: 20px 200px; /* adjust this to control the space between your inputs */
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px 200px;
   width: 60%;
   color: #000;
   font-size: 12px;
@@ -311,33 +348,33 @@ table {
 
 .patientForm div {
   margin-bottom: 8px;
-  margin-top: 30px;
+  margin-top: var(--margin-top);
 }
 
 .patient_title_dropdown_title {
   width: 104px;
-  height: 32px;
+  height: var(--height);
 }
 
 .patient_title_dropdown_big {
   width: 442px;
-  height: 32px;
+  height: var(--height);
 }
 
 .patient_title_dropdown_state {
   width: 182px;
-  height: 38px;
+  height: 29px;
   margin-right: 11px;
 }
 
 .patient_title_dropdown_zip {
   width: 249px;
-  height: 32px;
+  height: var(--height);
 }
 
 .patient_dropdown_terms {
   width: 104px;
-  height: 32px;
+  height: var(--height);
   margin-right: 30px;
 }
 
@@ -354,7 +391,7 @@ table {
 }
 .patient_title_dropdown_library {
   width: 495px;
-  height: 32px;
+  height: var(--height);
   margin-top: -30px !important;
 }
 .users_address2 {
@@ -373,6 +410,7 @@ table {
 }
 
 .button-general-patient-container {
+  margin-top: 0 !important;
   display: flex;
 }
 .button-general-patient-save {
@@ -384,7 +422,7 @@ table {
 }
 
 .button-classic-doctors-add {
-  margin-top: 25px;
+  margin-top: 10px;
 }
 
 /* Company Edit Page*/
@@ -393,8 +431,8 @@ table {
   margin-top: 45px;
   margin-left: 180px;
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* this will create 2 columns */
-  grid-gap: 20px 200px; /* adjust this to control the space between your inputs */
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px 200px;
   width: 60%;
   color: #000;
   font-size: 12px;
@@ -405,12 +443,12 @@ table {
 
 .company_form div {
   margin-bottom: 8px;
-  margin-top: 30px;
+  margin-top: var(--margin-top);
 }
 
 .company_title_dropdown_big {
   width: 442px;
-  height: 32px;
+  height: var(--height);
 }
 
 .button-general-company-send {
@@ -425,22 +463,24 @@ table {
 
 .company_title_dropdown_state {
   width: 182px;
-  height: 38px;
+  height: 29px;
   margin-right: 11px;
 }
 
 .company_title_dropdown_zip {
   width: 249px;
-  height: 32px;
+  height: var(--height);
 }
 
 .company_form_doctor_checkboxes {
+  font-size: 14px;
   width: 506px;
   height: 214px;
   border: 1px solid black;
 }
 
 .company_form_patient_checkboxes {
+  font-size: 14px;
   width: 506px;
   height: 214px;
   border: 1px solid black;
@@ -529,7 +569,7 @@ table {
 .video-edit-label-name input {
   margin-top: 5px;
   width: 442px;
-  height: 32px;
+  height: var(--height);
 }
 
 .video-edit-label-prescribed {
@@ -540,7 +580,7 @@ table {
 .video-edit-label-prescribed select {
   margin-top: 5px;
   width: 182px;
-  height: 38px;
+  height: 29px;
 }
 
 .video-edit-label-url {
@@ -551,7 +591,7 @@ table {
 .video-edit-label-url input {
   margin-top: 5px;
   width: 442px;
-  height: 32px;
+  height: var(--height);
 }
 .button-general-video-send {
   margin-bottom: 216px;
@@ -561,7 +601,7 @@ table {
 }
 /*  Library Page*/
 .library-td-possition td {
-  padding-bottom: 80px;
+  padding-bottom: 45px;
 }
 
 /* Edit Library Page*/
@@ -588,7 +628,7 @@ table {
 }
 
 .button-general-library-send {
-  margin-left: 920px;
+  margin-left: 950px;
   margin-right: 22px;
 }
 
@@ -628,8 +668,9 @@ table {
 }
 
 .library-add-video-button {
-  margin-left: 25%;
-  margin-top: 100%;
+  margin-left: 37%;
+  margin-top: 42%;
+  margin-bottom: 45%;
 }
 
 .ReactModal__Overlay {
@@ -690,11 +731,11 @@ table {
 
 .embla__slide {
   height: 74px;
-  width: 109px;
   position: relative;
   border-radius: 5px;
   flex: 0 0 auto;
   width: calc((100% - 0rem) / 8); /* Adjust here for the number of slides you want to show */
+  width: 109px;
   margin-bottom: 10px;
   margin-left: 12px;
   background: rgb(23, 192, 200);

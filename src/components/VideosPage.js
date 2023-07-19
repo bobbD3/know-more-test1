@@ -38,11 +38,11 @@ const VideoPage = () => {
                 <td>{lang.status}</td>
                 <td>
                   <Link to={`/edit-video/${video.id}`}>
-                    <button className='button-classic user-add-button-possition-edit'>Edit</button>
+                    <button className='button-classic video-add-button-possition-edit'>Edit</button>
                   </Link>
                 </td>
                 <td>
-                  <button className='button-classic user-add-button-possition-remove' onClick={() => removeVideo(video.id)}>
+                  <button className='button-classic video-add-button-possition-remove' onClick={() => removeVideo(video.id)}>
                     Remove
                   </button>
                 </td>

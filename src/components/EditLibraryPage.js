@@ -34,17 +34,33 @@ const EditLibraryPage = () => {
 
   useEffect(() => {
     if (id) {
-      const numericId = Number(id) // convert the id from string to number
-      const library = libraries.find(library => library.id === numericId) // changed here
+      const numericId = Number(id)
+      const library = libraries.find(library => library.id === numericId)
 
       if (library && library.videoPackages) {
-        // ensure that videoPackages exists
         setLibraryName(library.library)
-        const libraryVideoPackages = library.videoPackages.map(videoIds => (videoIds ? contextVideos.filter(video => videoIds.includes(video.id)) : [])) // ensure that videoIds exists
+        const libraryVideoPackages = library.videoPackages.map(videoIds => (videoIds ? contextVideos.filter(video => videoIds.includes(video.id)) : []))
         setVideoPackages(libraryVideoPackages)
+
+        console.log('Updated videoPackages:', libraryVideoPackages)
       }
     }
   }, [id, libraries, contextVideos])
+
+  useEffect(() => {
+    console.log('emblaApiRef.current before reInit: ', emblaApiRef.current)
+    if (emblaApiRef.current) {
+      emblaApiRef.current.reInit()
+      console.log('emblaApiRef.current after reInit: ', emblaApiRef.current)
+    }
+  }, [videoPackages])
+
+  useEffect(() => {
+    emblaApiRef.current = emblaApi
+    if (emblaApi) {
+      emblaApi.reInit()
+    }
+  }, [emblaApi])
 
   const handleSave = () => {
     const numericId = Number(id) // convert the id from string to number
@@ -75,6 +91,31 @@ const EditLibraryPage = () => {
     setCurrentPackageIndex(prevIndex => prevIndex + 1) // increment the current package index
   }
 
+  const handleDragEnd = result => {
+    console.log('Drag ended with result: ', result) // log the result of drag and drop
+
+    if (!result.destination || !result.source) {
+      return
+    }
+
+    const { source, destination } = result
+
+    setVideoPackages(prev => {
+      const newVideoPackages = [...prev]
+      const sourcePackageIndex = parseInt(source.droppableId.replace('carousel-', ''), 10)
+      const destinationPackageIndex = parseInt(destination.droppableId.replace('carousel-', ''), 10)
+
+      // Make sure both source and destination packages exist before performing operations
+      if (newVideoPackages[sourcePackageIndex] && newVideoPackages[destinationPackageIndex]) {
+        const [removed] = newVideoPackages[sourcePackageIndex].splice(source.index, 1)
+        newVideoPackages[destinationPackageIndex].splice(destination.index, 0, removed)
+        console.log('Updated videoPackages after drag and drop: ', newVideoPackages) // log the new state after drag and drop
+      }
+
+      return newVideoPackages
+    })
+  }
+
   return (
     <div className='library-edit-add-container'>
       {/* <h2>{id ? 'Edit' : 'Add'} Library</h2> */}
@@ -88,6 +129,7 @@ const EditLibraryPage = () => {
       <div className='videos-container'>
         {videoPackages.map((videoPackage, packageIndex) => (
           <div key={packageIndex}>
+            {console.log('Rendering Carousel with packageIndex:', packageIndex, 'and videos:', videoPackage)}
             <div className='library-edit-label-package'>
               <div>
                 <input type='text' placeholder='Name your package' />
@@ -104,7 +146,7 @@ const EditLibraryPage = () => {
                 </button>
               </div>
             </div>
-            <Carousel>
+            <Carousel onDragEnd={handleDragEnd} droppableId={`carousel-${packageIndex}`}>
               {videoPackage.map((video, index) => (
                 <div className='embla__slide' key={index} style={{ backgroundImage: `url(${video.languages[0].thumbnail})` }}>
                   {' '}
@@ -144,8 +186,9 @@ const EditLibraryPage = () => {
               }}
             >
               <button className='button-classic library-add-video-button' onClick={() => handleAddVideo(video)}>
-                Add: {video.videoName}
+                Add
               </button>
+              <div>{video.videoName}</div>
             </div>
           ))}
         </div>

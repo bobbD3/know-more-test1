@@ -19,11 +19,16 @@ const UsersPage = () => {
 
   return (
     <div>
-      <select className='button-general user-add-button-possition' onChange={e => handleAddUser(e.target.value)}>
-        <option value=''>Add</option>
+      <button value='doctor' className='button-general user-add-button-possition-doctor' onClick={e => handleAddUser(e.target.value)}>
+        Add Doctor
+      </button>
+      <button value='patient' className='button-general user-add-button-possition-patient' onClick={e => handleAddUser(e.target.value)}>
+        Add Patient
+      </button>
+      {/* <select className='button-general user-add-button-possition' onChange={e => handleAddUser(e.target.value)}>
         <option value='doctor'>Add Doctor</option>
         <option value='patient'>Add Patient</option>
-      </select>
+      </select> */}
       <table>
         <thead>
           <tr>

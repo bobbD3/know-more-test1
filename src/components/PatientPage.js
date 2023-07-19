@@ -104,7 +104,7 @@ const PatientPage = () => {
           <div>Mobile</div>
           <input className='patient_title_dropdown_big' name='mobile' value={formState.mobile} onChange={handleChange} placeholder='Mobile' />
         </div>
-        <div>
+        <section>
           <div className='users_verificaiton'>
             <div>
               <div>Verified Mobile</div>
@@ -163,11 +163,11 @@ const PatientPage = () => {
               </div>
             ))}
           </div>
-        </div>
+        </section>
         <button className='button-general button-general-patient-send' type='submit'>
           Send Invite
         </button>
-        <div>
+        <div className='button-general-patient-container '>
           <Link to='/users'>
             <button className='button-general button-general-patient-cancel' type='button'>
               Cancel
