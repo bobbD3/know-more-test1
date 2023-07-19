@@ -144,12 +144,12 @@ const EditLibraryPage = () => {
               }}
             >
               <button className='button-classic library-add-video-button' onClick={() => handleAddVideo(video)}>
-                {video.videoName}
+                Add: {video.videoName}
               </button>
             </div>
           ))}
         </div>
-        <button className='button-general' onClick={() => setModalIsOpen(false)}>
+        <button className='button-general button-general-library-close' onClick={() => setModalIsOpen(false)}>
           Close
         </button>
       </ReactModal>

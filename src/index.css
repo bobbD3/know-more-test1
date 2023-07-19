@@ -321,7 +321,7 @@ table {
 
 .patient_title_dropdown_big {
   width: 442px;
-  height: 56px;
+  height: 32px;
 }
 
 .patient_title_dropdown_state {
@@ -592,6 +592,9 @@ table {
   margin-right: 22px;
 }
 
+.button-general-library-close {
+  margin-top: 25px;
+}
 .library-edit-label {
   display: grid;
   justify-items: start;
@@ -625,8 +628,8 @@ table {
 }
 
 .library-add-video-button {
-  margin-left: 35%;
-  margin-top: 35%;
+  margin-left: 25%;
+  margin-top: 100%;
 }
 
 .ReactModal__Overlay {

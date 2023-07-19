@@ -52,8 +52,13 @@ const UsersPage = () => {
               <td>{user.confirmEmail}</td>
               <td>{user.confirmPhone}</td>
               <td>{user.confirmPolicy}</td>
-              <td className='user-add-button-possition-edit'>
+              {/* <td className='user-add-button-possition-edit'>
                 <Link to={`/edit-user/${user.id}`}>
+                  <button className='button-classic'>Edit</button>
+                </Link>
+              </td> */}
+              <td className='user-add-button-possition-edit'>
+                <Link to={user.title === 'Dr.' ? `/add-doctors/` : `/add-patient/`}>
                   <button className='button-classic'>Edit</button>
                 </Link>
               </td>
