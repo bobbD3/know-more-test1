@@ -41,17 +41,13 @@ const EditLibraryPage = () => {
         setLibraryName(library.library)
         const libraryVideoPackages = library.videoPackages.map(videoIds => (videoIds ? contextVideos.filter(video => videoIds.includes(video.id)) : []))
         setVideoPackages(libraryVideoPackages)
-
-        console.log('Updated videoPackages:', libraryVideoPackages)
       }
     }
   }, [id, libraries, contextVideos])
 
   useEffect(() => {
-    console.log('emblaApiRef.current before reInit: ', emblaApiRef.current)
     if (emblaApiRef.current) {
       emblaApiRef.current.reInit()
-      console.log('emblaApiRef.current after reInit: ', emblaApiRef.current)
     }
   }, [videoPackages])
 
@@ -87,8 +83,8 @@ const EditLibraryPage = () => {
   }
 
   const handleAddPackage = () => {
-    setVideoPackages(prevVideoPackages => [...prevVideoPackages, []]) // add a new empty package
-    setCurrentPackageIndex(prevIndex => prevIndex + 1) // increment the current package index
+    setVideoPackages(prevVideoPackages => [...prevVideoPackages, []])
+    setCurrentPackageIndex(prevIndex => prevIndex + 1)
   }
 
   const handleDragStart = e => {
@@ -96,8 +92,6 @@ const EditLibraryPage = () => {
   }
 
   const handleDragEnd = result => {
-    console.log('Drag ended with result: ', result) // log the result of drag and drop
-
     if (!result.destination || !result.source) {
       return
     }
@@ -113,7 +107,6 @@ const EditLibraryPage = () => {
       if (newVideoPackages[sourcePackageIndex] && newVideoPackages[destinationPackageIndex]) {
         const [removed] = newVideoPackages[sourcePackageIndex].splice(source.index, 1)
         newVideoPackages[destinationPackageIndex].splice(destination.index, 0, removed)
-        console.log('Updated videoPackages after drag and drop: ', newVideoPackages) // log the new state after drag and drop
       }
 
       return newVideoPackages
@@ -133,7 +126,6 @@ const EditLibraryPage = () => {
       <div className='videos-container'>
         {videoPackages.map((videoPackage, packageIndex) => (
           <div key={packageIndex}>
-            {console.log('Rendering Carousel with packageIndex:', packageIndex, 'and videos:', videoPackage)}
             <div className='library-edit-label-package'>
               <div>
                 <input type='text' placeholder='Name your package' />
