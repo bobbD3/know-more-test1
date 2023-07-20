@@ -39,7 +39,7 @@ const EditLibraryPage = () => {
 
       if (library && library.videoPackages) {
         setLibraryName(library.library)
-        const libraryVideoPackages = library.videoPackages.map(videoIds => (videoIds ? contextVideos.filter(video => videoIds.includes(video.id)) : []))
+        const libraryVideoPackages = library.videoPackages.map(videoIds => (videoIds ? videoIds.map(videoId => contextVideos.find(video => video.id === videoId)) : []))
         setVideoPackages(libraryVideoPackages)
       }
     }
@@ -60,6 +60,7 @@ const EditLibraryPage = () => {
 
   const handleSave = () => {
     const numericId = Number(id) // convert the id from string to number
+
     const newLibrary = {
       id: numericId || libraries.length + 1,
       library: libraryName,
@@ -68,8 +69,10 @@ const EditLibraryPage = () => {
 
     if (numericId) {
       setLibraries(libraries.map(library => (library.id === numericId ? newLibrary : library))) // changed here
+      console.log(libraries)
     } else {
       setLibraries(prevLibraries => [...prevLibraries, newLibrary])
+      console.log(libraries)
     }
 
     navigate('/libraries')
@@ -85,10 +88,6 @@ const EditLibraryPage = () => {
   const handleAddPackage = () => {
     setVideoPackages(prevVideoPackages => [...prevVideoPackages, []])
     setCurrentPackageIndex(prevIndex => prevIndex + 1)
-  }
-
-  const handleDragStart = e => {
-    e.currentTarget.style.zIndex = '1000'
   }
 
   const handleDragEnd = result => {

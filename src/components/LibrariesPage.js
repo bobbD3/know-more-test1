@@ -4,7 +4,6 @@ import LibrariesContext from '../contexts/LibrariesContext'
 
 const LibrariesPage = () => {
   const { libraries, setLibraries } = useContext(LibrariesContext)
-
   const removeLibrary = id => {
     setLibraries(libraries.filter(library => library.id !== id))
   }

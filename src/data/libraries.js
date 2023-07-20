@@ -5,7 +5,7 @@ const dummyLibraries = [
     videoPackages: [
       [1, 2],
       [3, 4]
-    ] // videoPackages is an array of arrays (each array is a video package)
+    ]
   },
   {
     id: 2,

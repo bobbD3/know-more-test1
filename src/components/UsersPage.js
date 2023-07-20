@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { UsersContext } from '../contexts/UserContext'
 import { Link, useNavigate } from 'react-router-dom'
+import icon from '../images/Auction.svg'
 
 const UsersPage = () => {
   const { users, setUsers } = useContext(UsersContext)
@@ -39,9 +40,11 @@ const UsersPage = () => {
             <th>Address1</th>
             <th>Email</th>
             <th>Mobile</th>
-            <th>Icon</th>
-            <th>Icon</th>
-            <th>Icon</th>
+            {/* <th>Icon</th>
+            <th>Icon</th> */}
+            <th>
+              <img src={icon} alt='icon' />{' '}
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -54,8 +57,8 @@ const UsersPage = () => {
               <td>{user.address1}</td>
               <td>{user.email}</td>
               <td>{user.mobile}</td>
-              <td>{user.confirmEmail}</td>
-              <td>{user.confirmPhone}</td>
+              {/* <td>{user.confirmEmail}</td>
+              <td>{user.confirmPhone}</td> */}
               <td>{user.confirmPolicy}</td>
               {/* <td className='user-add-button-possition-edit'>
                 <Link to={`/edit-user/${user.id}`}>

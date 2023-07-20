@@ -384,6 +384,11 @@ input {
   height: var(--height);
   margin-right: 30px;
 }
+.patient_dropdown_terms-language {
+  width: 370px;
+  height: var(--height);
+  margin-right: 30px;
+}
 
 .patient_locations_list {
   width: 506px;
@@ -726,7 +731,7 @@ input {
 }
 
 .embla__viewport {
-  width: 85%;
+  width: 100%;
   height: 100%;
 }
 

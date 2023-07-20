@@ -71,14 +71,14 @@ const PatientPage = () => {
           <input className='patient_title_dropdown_big' name='firstName' value={formState.firstName} onChange={handleChange} placeholder='First Name' />
           <div>Last Name</div>
           <input className='patient_title_dropdown_big' name='lastName' value={formState.lastName} onChange={handleChange} placeholder='Last Name' />
-          <div>Roles</div>
-          <select className='patient_title_dropdown_title' name='roles' value={formState.roles} onChange={handleChange}>
+          <div>Role: {roles[0]}</div>
+          {/* <select className='patient_title_dropdown_title' name='roles' value={formState.roles} onChange={handleChange}>
             {roles.map((roles, index) => (
               <option value={roles} key={index}>
                 {roles}
               </option>
             ))}
-          </select>
+          </select> */}
           <div>Address</div>
           <input className='patient_title_dropdown_big' name='address1' value={formState.address1} onChange={handleChange} placeholder='Address' />
           <div>City</div>
@@ -106,7 +106,7 @@ const PatientPage = () => {
         </div>
         <section>
           <div className='users_verificaiton'>
-            <div>
+            {/* <div>
               <div>Verified Mobile</div>
               <select className='patient_dropdown_terms' name='confirmPhone' value={formState.confirmPhone} onChange={handleChange}>
                 {confirmationOptions.map((option, index) => (
@@ -115,7 +115,7 @@ const PatientPage = () => {
                   </option>
                 ))}
               </select>
-            </div>
+            </div> */}
             <div>
               <div>Accepted Terms</div>
               <select className='patient_dropdown_terms' name='confirmPolicy' value={formState.confirmPolicy} onChange={handleChange}>
@@ -128,7 +128,7 @@ const PatientPage = () => {
             </div>
             <div>
               <div>Language</div>
-              <select className='patient_dropdown_terms' name='language' value={formState.language} onChange={handleChange}>
+              <select className='patient_dropdown_terms-language' name='language' value={formState.language} onChange={handleChange}>
                 {languages.map((language, index) => (
                   <option value={language} key={index}>
                     {language}
@@ -136,7 +136,7 @@ const PatientPage = () => {
                 ))}
               </select>
             </div>
-            <div>
+            {/* <div>
               <div>Verified Email</div>
               <select className='patient_dropdown_terms' name='confirmEmail' value={formState.confirmEmail} onChange={handleChange}>
                 {confirmationOptions.map((option, index) => (
@@ -145,7 +145,7 @@ const PatientPage = () => {
                   </option>
                 ))}
               </select>
-            </div>
+            </div> */}
           </div>
           <div className='doctor_locations_list'>
             <div>Doctors</div>
