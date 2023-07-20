@@ -91,6 +91,10 @@ const EditLibraryPage = () => {
     setCurrentPackageIndex(prevIndex => prevIndex + 1) // increment the current package index
   }
 
+  const handleDragStart = e => {
+    e.currentTarget.style.zIndex = '1000'
+  }
+
   const handleDragEnd = result => {
     console.log('Drag ended with result: ', result) // log the result of drag and drop
 

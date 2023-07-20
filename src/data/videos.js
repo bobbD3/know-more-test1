@@ -133,6 +133,51 @@ const dummyVideos = [
         status: 'Inactive'
       }
     ]
+  },
+  {
+    id: 10,
+    videoName: 'Video 10',
+    prescribed: false,
+    package: 'Package A',
+    languages: [
+      {
+        thumbnail: 'https://images.unsplash.com/photo-1584515933487-779824d29309', //need to enable CORS on that server
+        videoFile: null,
+        language: 'Spanish',
+        videoURL: 'https://example.com/video-url10',
+        status: 'Inactive'
+      }
+    ]
+  },
+  {
+    id: 11,
+    videoName: 'Video 11',
+    prescribed: false,
+    package: 'Package A',
+    languages: [
+      {
+        thumbnail: 'https://images.unsplash.com/photo-1584515933487-779824d29309', //need to enable CORS on that server
+        videoFile: null,
+        language: 'Spanish',
+        videoURL: 'https://example.com/video-url11',
+        status: 'Inactive'
+      }
+    ]
+  },
+  {
+    id: 12,
+    videoName: 'Video 12',
+    prescribed: false,
+    package: 'Package A',
+    languages: [
+      {
+        thumbnail: 'https://images.unsplash.com/photo-1584515933487-779824d29309', //need to enable CORS on that server
+        videoFile: null,
+        language: 'Spanish',
+        videoURL: 'https://example.com/video-url12',
+        status: 'Inactive'
+      }
+    ]
   }
 ]
 

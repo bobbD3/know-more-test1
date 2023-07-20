@@ -1,3 +1,10 @@
+#draggable {
+  position: absolute;
+  pointer-events: none;
+  height: 100%;
+  width: 100%;
+}
+
 :root {
   --height: 23px;
   --margin-top: 18px;
@@ -608,11 +615,12 @@ input {
 
 .modal-library-add-video-container {
   display: flex;
+  flex-wrap: wrap;
 }
 .video-thumbnail-container-modal {
   background-size: cover;
   background-position: center;
-  margin-bottom: 30px;
+  margin-bottom: 90px;
   margin-right: 30px;
 }
 
@@ -669,7 +677,7 @@ input {
 
 .library-add-video-button {
   margin-left: 37%;
-  margin-top: 42%;
+  margin-top: 28%;
   margin-bottom: 45%;
 }
 
@@ -752,4 +760,10 @@ input {
 .embla__slide__content {
   margin: auto;
   margin-top: 60px;
+}
+
+.embla__slide[style] {
+  position: relative !important;
+  z-index: 5000 !important;
+  opacity: 1 !important;
 }
