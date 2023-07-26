@@ -7,7 +7,10 @@
 
 :root {
   --height: 23px;
+  --video-height: 32px;
   --margin-top: 18px;
+  --grey-color-light: #d9d9d9;
+  --grey-color-dark: #9d9d9d;
 }
 
 body {
@@ -52,6 +55,24 @@ input {
   border-radius: 5px;
   padding: 4px, 10px, 4px, 10px;
 }
+.button-classic-thumbnail {
+  height: 23px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  background-color: var(--grey-color-light);
+  border: none;
+  border-radius: 5px;
+  padding: 0px 10px 0px 10px;
+  text-align: center;
+}
+
+.video-thumbnail-holder-upload {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .button-general {
   height: 35px;
   max-width: 125px;
@@ -65,14 +86,14 @@ input {
 
 .user-add-button-possition {
   position: absolute;
-  left: 85.7%;
+  left: 83%;
   top: 12%;
 }
 
 .user-add-button-possition-edit {
   z-index: 99;
   position: absolute;
-  left: 80.5%;
+  left: 79%;
 }
 
 .user-add-button-possition-patient {
@@ -98,7 +119,7 @@ input {
 
 .video-add-button-possition-edit {
   position: absolute;
-  left: 84%;
+  left: 81.5%;
 }
 
 .video-add-button-possition-remove {
@@ -437,6 +458,13 @@ input {
   margin-top: 10px;
 }
 
+/* Company  Page*/
+
+.organization-add-button-possition-edit {
+  z-index: 99;
+  position: absolute;
+  left: 77%;
+}
 /* Company Edit Page*/
 
 .company_form {
@@ -502,12 +530,44 @@ input {
   display: flex;
 }
 
+/*  Video Page*/
+
+.video-add-button-possition {
+  position: absolute;
+  left: 84.5%;
+  top: 12%;
+}
 /* Edit Video Page*/
+
+.thumnail-holder {
+  position: relative;
+}
 
 .video-thumbnail-container {
   background-size: cover;
   background-position: center;
 }
+
+.video-thumbnail-holder {
+  background-color: var(--grey-color-dark);
+  width: 100px;
+  font-size: 12px;
+  height: 20px;
+  position: absolute;
+  margin-top: 39px;
+  margin-left: -21px;
+}
+
+.video-video-holder {
+  background-color: var(--grey-color-dark);
+  width: 100px;
+  height: 20px;
+  font-size: 12px;
+  position: absolute;
+  margin-top: 39px;
+  margin-left: -21px;
+}
+
 .video-container {
   margin-top: 85px;
   margin-left: 140px;
@@ -527,7 +587,7 @@ input {
   width: 100px;
   height: 100px;
   /* margin-right: 40px; */
-  background-color: #d9d9d9;
+  background-color: #5f4949;
   border: none;
   display: flex;
   align-items: center;
@@ -539,8 +599,7 @@ input {
 .video-upload {
   width: 100px;
   height: 100px;
-  margin-right: 51px;
-  background-color: #d9d9d9;
+  background-color: #5f4949;
   border: none;
   display: flex;
   align-items: center;
@@ -566,6 +625,8 @@ input {
   justify-items: center; /* Centers items horizontally within each grid cell */
   align-items: center; /* Centers items vertically within each grid cell */
   text-align: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e1dfdf;
 }
 
 .video-edit-label {
@@ -595,25 +656,68 @@ input {
   height: 29px;
 }
 
+.video-edit-label-column {
+  display: grid;
+  justify-items: start;
+}
+
+.video-edit-label-column select {
+  margin-top: 3px;
+  width: 194px;
+  height: 40px;
+}
+
+.video-edit-label-column input {
+  margin-top: -2px;
+  width: 182px;
+  height: 32px;
+}
+
 .video-edit-label-url {
   display: grid;
   justify-items: start;
 }
 
 .video-edit-label-url input {
-  margin-top: 5px;
-  width: 442px;
-  height: var(--height);
+  margin-top: 1px;
+  width: 340px;
+  height: var(--video-height);
 }
+
+.video-cc-edit-label-url-input {
+  width: 264px !important;
+  margin-right: 20px !important;
+}
+
+.video-cc-edit-label-url-input-button {
+  margin-top: 8px;
+}
+.video-closed-caption {
+  display: flex;
+}
+
+.video-descripiton {
+  max-width: 340px;
+  max-height: 93px;
+  width: 340px;
+  height: 93px;
+}
+
 .button-general-video-send {
   margin-bottom: 216px;
   margin-top: 60px;
-  margin-left: 1300px;
+  margin-left: 1337px;
   margin-right: 22px;
 }
 /*  Library Page*/
 .library-td-possition td {
   padding-bottom: 45px;
+}
+
+.library-add-button-possition-edit {
+  z-index: 99;
+  position: absolute;
+  left: 78%;
 }
 
 /* Edit Library Page*/

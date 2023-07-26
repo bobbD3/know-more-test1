@@ -1,24 +1,24 @@
-import React, { useState, useContext } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import React, { useState, useContext, useEffect } from 'react'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { UsersContext } from '../contexts/UserContext'
 import dummyHospitals from '../data/hospitals'
 
 const initialFormState = {
-  id: Date.now(),
-  title: '',
-  firstName: '',
-  lastName: '',
-  role: 'Doctor',
-  address1: '',
-  city: '',
-  state: '',
-  zip: '',
-  email: '',
-  mobile: '',
-  confirmEmail: 'No',
-  confirmPhone: 'No',
-  confirmPolicy: 'No',
-  language: 'English'
+  Id: Date.now(),
+  Title: '',
+  FirstName: '',
+  LastName: '',
+  Role: 'Doctor',
+  Address1: '',
+  City: '',
+  State: '',
+  Zip: '',
+  Email: '',
+  Mobile: '',
+  ConfirmEmail: 'No',
+  ConfirmPhone: 'No',
+  ConfirmPolicy: 'No',
+  Language: 'English'
 }
 
 const roles = ['Doctor']
@@ -32,7 +32,35 @@ const DoctorPage = () => {
   const { users, setUsers } = useContext(UsersContext)
   const [formState, setFormState] = useState(initialFormState)
   const [selectedHospitals, setSelectedHospitals] = useState([])
+  const [isEditing, setIsEditing] = useState(false)
+  const { id } = useParams()
   const navigate = useNavigate()
+
+  const user = users.find(user => user.Id === Number(id))
+  // Fetch the user's data when the page loads
+
+  useEffect(() => {
+    if (user) {
+      setFormState({
+        id: user.Id,
+        title: user.Title,
+        firstName: user.FirstName,
+        lastName: user.LastName,
+        role: user.Role,
+        address1: user.Address,
+        city: user.City,
+        state: user.State,
+        zip: user.Zip,
+        email: user.Email,
+        mobile: user.MobileNumber,
+        confirmEmail: false, // these fields are not in the user data, you may need to handle them differently
+        confirmPhone: false, // same as above
+        confirmPolicy: user.HasAcceptedTerms === 1,
+        language: user.Language
+      })
+      setIsEditing(true)
+    }
+  }, [user])
 
   const handleCheckChangeHospital = hospitalsId => {
     setSelectedHospitals(prevState => {
@@ -52,8 +80,14 @@ const DoctorPage = () => {
 
   const handleSubmit = event => {
     event.preventDefault()
-    setUsers([...users, { ...formState, id: Date.now() }])
-    setFormState(initialFormState)
+    if (user) {
+      // update existing user
+      setUsers(users.map(u => (u.Id === user.Id ? { ...u, ...formState } : u)))
+    } else {
+      // add new user
+      setUsers([...users, { ...formState, Id: Date.now() }])
+    }
+    setIsEditing(false) // Resetting isEditing state
     navigate('/users')
   }
 
@@ -186,7 +220,7 @@ const DoctorPage = () => {
             </button>
           </Link>
           <button className='button-general position-doctor-save' type='submit'>
-            Save
+            {isEditing ? 'Save' : 'Create'}
           </button>
         </div>
       </form>

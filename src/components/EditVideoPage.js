@@ -73,7 +73,7 @@ const VideoAddEditPage = () => {
         <div className='video-edit-label'>
           <div>
             <label className='video-edit-label-name'>
-              Video Name:
+              Program Name:
               <input type='text' name='videoName' value={videoName} onChange={e => setVideoName(e.target.value)} />
             </label>
           </div>
@@ -95,33 +95,67 @@ const VideoAddEditPage = () => {
         {languages.map((language, index) => (
           <div className='video-form-scroll' key={index}>
             <div className='thumbnail-upload'>
-              <label>
-                Thumbnail
-                <input type='file' style={{ display: 'none' }} onChange={e => handleFileChange(e, index, 'thumbnail')} />
-                {language.thumbnailName ? language.thumbnailName.substring(0, 24) : ' '}
-              </label>
+              <div className='thumnail-holder'>
+                <label>
+                  <div className='button-classic-thumbnail video-thumbnail-holder-upload'>Upload</div>
+                  <div className='video-thumbnail-holder'>Thumbnail</div>
+                  <input type='file' style={{ display: 'none' }} onChange={e => handleFileChange(e, index, 'thumbnail')} />
+                  {language.thumbnailName ? language.thumbnailName.substring(0, 8) : ' '}
+                </label>
+              </div>
             </div>
             <div className='video-upload'>
-              <label>
-                Video File
-                <input type='file' style={{ display: 'none' }} onChange={e => handleFileChange(e, index, 'videoFile')} />
-                {language.videoFileName ? language.videoFileName.substring(0, 24) : ' '}
+              <div className='thumnail-holder'>
+                <label>
+                  <div className='button-classic-thumbnail video-thumbnail-holder-upload'>Upload</div>
+                  <div className='video-video-holder'>Program</div>
+                  <input type='file' style={{ display: 'none' }} onChange={e => handleFileChange(e, index, 'videoFile')} />
+                  {language.videoFileName ? language.videoFileName.substring(0, 8) : ' '}
+                </label>
+              </div>
+            </div>
+            <div>
+              <label className='video-edit-label-column'>
+                Language:
+                <select name='language' value={language.language} onChange={e => handleInputChange(e, index)}>
+                  <option value=''>Select a language</option>
+                  <option value='English'>English</option>
+                  <option value='Spanish'>Spanish</option>
+                  <option value='Italian'>Italian</option>
+                  <option value='German'>German</option>
+                </select>
+              </label>
+              <label className='video-edit-label-column'>
+                Owner:
+                <input type='text' name='videoURL' />
               </label>
             </div>
-            <label className='video-edit-label-prescribed'>
-              Language:
-              <select name='language' value={language.language} onChange={e => handleInputChange(e, index)}>
-                <option value=''>Select a language</option>
-                <option value='English'>English</option>
-                <option value='Spanish'>Spanish</option>
-                <option value='Italian'>Italian</option>
-                <option value='German'>German</option>
-              </select>
-            </label>
-            <label className='video-edit-label-url'>
-              Video URL:
-              <input type='text' name='videoURL' value={language.videoURL} onChange={e => handleInputChange(e, index)} />
-            </label>
+            <div>
+              {/* <label className='video-edit-label-url'>
+                Video URL:
+                <input type='text' name='videoURL' value={language.videoURL} onChange={e => handleInputChange(e, index)} />
+              </label> */}
+              <label className='video-edit-label-url'>
+                Tags
+                <input type='text' name='Tags' />
+              </label>
+              <div>
+                <label className='video-edit-label-url '>
+                  Closed Caption
+                  <div className='video-closed-caption'>
+                    <input className='video-cc-edit-label-url-input' type='file' style={{ display: 'none' }} onChange={e => handleFileChange(e, index, 'closedCaption')} />
+                    <input className='video-cc-edit-label-url-input' type='text' name='closedCaptionName' value={language.closedCaptionName || ''} disabled />
+                    <button className='button-classic video-cc-edit-label-url-input-button ' type='button' onClick={() => document.getElementsByName('closedCaptionName')[index].previousSibling.click()}>
+                      Upload
+                    </button>
+                  </div>
+                </label>
+              </div>
+            </div>
+            <div className='video-edit-label-url '>
+              Description
+              <textarea className='video-descripiton'></textarea>
+            </div>
             <label className='video-edit-label-prescribed'>
               Status:
               {/* <select name='status' value={language.status} onChange={e => handleInputChange(e, index)}>

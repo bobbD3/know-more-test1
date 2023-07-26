@@ -1,15 +1,4 @@
-// import React, { createContext, useState } from 'react'
-// import dummyHospitals from '../data/hospitals'
-
-// export const HospitalsContext = createContext()
-
-// export const HospitalsProvider = ({ children }) => {
-//   const [hospitals, setHospitals] = useState(dummyHospitals)
-
-//   return <HospitalsContext.Provider value={{ hospitals, setHospitals }}>{children}</HospitalsContext.Provider>
-// }
-
-import { createContext, useState } from 'react'
+import React, { createContext, useState, useEffect } from 'react'
 import dummyHospitals from '../data/hospitals'
 
 export const HospitalsContext = createContext()

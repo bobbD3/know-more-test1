@@ -14,8 +14,8 @@ const CompanyPage = () => {
       <table>
         <thead>
           <tr>
-            <th>Hospital</th>
-            <th>Address1</th>
+            <th>Organization</th>
+            <th>Address</th>
             <th>Mobile</th>
           </tr>
         </thead>
@@ -25,9 +25,9 @@ const CompanyPage = () => {
               <td>{user.name}</td>
               <td>{user.address1}</td>
               <td>{user.mobile}</td>
-              <td className='user-add-button-possition-edit'>
+              <td className='organization-add-button-possition-edit'>
                 <Link to={`/edit-company/${user.id}`}>
-                  <button className='button-classic '>Edit</button>
+                  <button className='button-classic '>Edit Organization</button>
                 </Link>
               </td>
               <td className='user-add-button-possition-remove'>
@@ -41,7 +41,7 @@ const CompanyPage = () => {
       </table>
       <div>
         <Link to={`/add-company`}>
-          <button className='button-general user-add-button-possition'>Add</button>
+          <button className='button-general user-add-button-possition'>Add Organization</button>
         </Link>
       </div>
     </div>

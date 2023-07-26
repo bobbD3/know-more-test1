@@ -46,13 +46,15 @@ const App = () => {
                       <Route path='/edit-user' element={<EditUserPage />} />
                       <Route path='/edit-user/:id' element={<EditUserPage />} />
                       <Route path='/add-company' element={<EditCompanyPage />} />
-                      <Route path='/edit-company/:id' element={<EditCompanyPage />} />
+                      <Route path='/edit-company/:id?' element={<EditCompanyPage />} />
                       <Route path='/edit-video' element={<EditVideoPage />} />
-                      <Route path='/edit-video/:id' element={<EditVideoPage />} />
+                      <Route path='/edit-video/:id?' element={<EditVideoPage />} />
                       <Route path='/edit-library' element={<EditLibraryPage />} />
-                      <Route path='/edit-library/:id' element={<EditLibraryPage />} />
-                      <Route path='/add-patient' element={<PatientPage />} />
-                      <Route path='/add-doctors' element={<DoctorsPage />} />
+                      <Route path='/edit-library/:id?' element={<EditLibraryPage />} />
+                      <Route path='/add-patient/' element={<PatientPage />} />
+                      <Route path='/add-patient/:id' element={<PatientPage />} />
+                      <Route path='/add-doctors/' element={<DoctorsPage />} />
+                      <Route path='/add-doctors/:id' element={<DoctorsPage />} />
                     </>
                   )}
                 </Routes>

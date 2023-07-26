@@ -18,7 +18,7 @@ const VideoPage = () => {
             <th>Name</th>
             {/* <th>Language</th>
             <th>Package</th> */}
-            <th>Video URL</th>
+            <th>Program URL</th>
             <th>Status</th>
             <th></th>
             <th></th>
@@ -38,7 +38,7 @@ const VideoPage = () => {
                 <td>{lang.status}</td>
                 <td>
                   <Link to={`/edit-video/${video.id}`}>
-                    <button className='button-classic video-add-button-possition-edit'>Edit</button>
+                    <button className='button-classic video-add-button-possition-edit'>Edit Program</button>
                   </Link>
                 </td>
                 <td>
@@ -53,7 +53,7 @@ const VideoPage = () => {
       </table>
       <div>
         <Link to={`/edit-video`}>
-          <button className='button-general user-add-button-possition'>Add</button>
+          <button className='button-general video-add-button-possition'>Add Program</button>
         </Link>
       </div>
     </div>

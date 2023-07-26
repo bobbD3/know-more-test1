@@ -23,17 +23,17 @@ const NavBar = () => {
         </li>
         <li>
           <NavLink to='/company' className={isActive('/locations')}>
-            Company
+            Organizations
           </NavLink>
         </li>
         <li>
           <NavLink to='/videos' className={isActive('/videos')}>
-            Videos
+            Programs
           </NavLink>
         </li>
         <li>
           <NavLink to='/libraries' className={isActive('/libraries')}>
-            Libraries
+            Program Packages
           </NavLink>
         </li>
       </ul>

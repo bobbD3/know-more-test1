@@ -13,7 +13,7 @@ const LibrariesPage = () => {
       <table>
         <thead>
           <tr>
-            <th>Name</th>
+            <th>Program Packages</th>
           </tr>
         </thead>
         <tbody>
@@ -21,9 +21,9 @@ const LibrariesPage = () => {
             return (
               <tr className='library-td-possition' key={library.id}>
                 <td>{library.library}</td>
-                <td className='user-add-button-possition-edit'>
+                <td className='library-add-button-possition-edit'>
                   <Link to={`/edit-library/${library.id}`}>
-                    <button className='button-classic'>Edit</button>
+                    <button className='button-classic'>Edit Package</button>
                   </Link>
                 </td>
                 <td className='user-add-button-possition-remove'>
@@ -38,7 +38,7 @@ const LibrariesPage = () => {
       </table>
       <div>
         <Link to={`/edit-library`}>
-          <button className='button-general user-add-button-possition'>Add</button>
+          <button className='button-general video-add-button-possition'>Add Package</button>
         </Link>
       </div>
     </div>

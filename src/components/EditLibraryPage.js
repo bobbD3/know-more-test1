@@ -116,18 +116,18 @@ const EditLibraryPage = () => {
     <div className='library-edit-add-container'>
       {/* <h2>{id ? 'Edit' : 'Add'} Library</h2> */}
       <div className='library-edit-label'>
-        <label>Library Name:</label>
+        <label>Program Package Name:</label>
         <input type='text' value={libraryName} onChange={event => setLibraryName(event.target.value)} />
       </div>
       <button className='button-classic button-edit-library-add' onClick={handleAddPackage}>
-        Add Package
+        Add Category
       </button>
       <div className='videos-container'>
         {videoPackages.map((videoPackage, packageIndex) => (
           <div key={packageIndex}>
             <div className='library-edit-label-package'>
               <div>
-                <input type='text' placeholder='Name your package' />
+                <input type='text' placeholder='Name your category' />
               </div>
               <div>
                 <button
@@ -137,7 +137,7 @@ const EditLibraryPage = () => {
                     setModalIsOpen(true)
                   }}
                 >
-                  Add Video
+                  Add Program
                 </button>
               </div>
             </div>
@@ -159,16 +159,16 @@ const EditLibraryPage = () => {
           </div>
         ))}
       </div>
-      <button className='button-general button-general-library-send' onClick={handleSave}>
-        Save
-      </button>
       <Link to='/libraries'>
-        <button className='button-general' type='button'>
+        <button className='button-general button-general-library-send' type='button'>
           Cancel
         </button>
       </Link>
+      <button className='button-general' onClick={handleSave}>
+        {id ? 'Save' : 'Create'}
+      </button>
       <ReactModal isOpen={modalIsOpen}>
-        <h2>Select a Video</h2>
+        <h2>Select a Program</h2>
         <div className='modal-library-add-video-container'>
           {contextVideos.map(video => (
             <div

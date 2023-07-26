@@ -1,5 +1,5 @@
-import React, { useState, useContext } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import React, { useState, useContext, useEffect } from 'react'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { UsersContext } from '../contexts/UserContext'
 import dummyUsers from '../data/data'
 
@@ -32,6 +32,31 @@ const PatientPage = () => {
   const [selectedDoctors, setSelectedDoctors] = useState([])
   const [formState, setFormState] = useState(initialFormState)
   const navigate = useNavigate()
+  const { id } = useParams()
+  const user = users.find(user => user.Id === Number(id))
+
+  useEffect(() => {
+    if (user) {
+      setFormState({
+        id: user.Id,
+        title: user.Title,
+        firstName: user.FirstName,
+        lastName: user.LastName,
+        role: user.Role,
+        address1: user.Address,
+        city: user.City,
+        state: user.State,
+        zip: user.Zip,
+        email: user.Email,
+        mobile: user.MobileNumber,
+        confirmEmail: user.EmailSubscribed === 1 ? 'Yes' : 'No', // assuming 1 is 'Yes' and 0 is 'No'
+        confirmPhone: user.SMSSubscribed === 1 ? 'Yes' : 'No', // same as above
+        confirmPolicy: user.HasAcceptedTerms === 1 ? 'Yes' : 'No', // same as above
+        language: user.Language
+      })
+      // you may want to also set selectedDoctors here, if your user data includes that
+    }
+  }, [user])
 
   const handleCheckChange = doctorId => {
     setSelectedDoctors(prevState => {
@@ -48,7 +73,13 @@ const PatientPage = () => {
 
   const handleSubmit = event => {
     event.preventDefault()
-    setUsers([...users, { ...formState, id: Date.now() }]) // add new user to shared state
+    if (user) {
+      // update existing user
+      setUsers(users.map(u => (u.Id === user.Id ? { ...u, ...formState } : u)))
+    } else {
+      // add new user
+      setUsers([...users, { ...formState, Id: Date.now() }])
+    }
     setFormState(initialFormState)
     navigate('/users')
   }
@@ -174,7 +205,7 @@ const PatientPage = () => {
             </button>
           </Link>
           <button className='button-general button-general-patient-save' type='submit'>
-            Save
+            {user ? 'Save' : 'Create'}
           </button>
         </div>
       </form>

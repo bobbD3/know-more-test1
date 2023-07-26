@@ -90,7 +90,7 @@ const EditCompanyPage = () => {
     <div>
       <form className='company_form' onSubmit={handleFormSubmit}>
         <div>
-          <div>Location Name</div>
+          <div>Organization Name</div>
           <input className='company_title_dropdown_big' type='text' name='locationName' value={locationName} onChange={event => setLocationName(event.target.value)} placeholder='Location Name' />
 
           <div>Address</div>
@@ -153,7 +153,7 @@ const EditCompanyPage = () => {
               Cancel
             </button>
             <button className='button-general position-company-save' type='submit'>
-              Save
+              {id ? 'Save' : 'Create'}
             </button>
           </Link>
         </div>
