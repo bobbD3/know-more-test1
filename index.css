@@ -1,0 +1,878 @@
+#draggable {
+  position: absolute;
+  pointer-events: none;
+  height: 100%;
+  width: 100%;
+}
+
+:root {
+  --height: 23px;
+  --video-height: 32px;
+  --margin-top: 18px;
+  --grey-color-light: #d9d9d9;
+  --grey-color-dark: #9d9d9d;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+th {
+  padding-left: 60px;
+  font-weight: bold;
+  text-align: left;
+  padding-bottom: 20px;
+}
+td {
+  padding-top: 12px;
+  padding-left: 60px;
+  text-align: left;
+}
+
+table {
+  margin-top: 100px;
+}
+
+input {
+  padding-left: 5px;
+}
+/* Buttons */
+
+.button-classic {
+  height: 23px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  background-color: #d9d9d9;
+  border: none;
+  border-radius: 5px;
+  padding: 4px, 10px, 4px, 10px;
+}
+.button-classic-thumbnail {
+  height: 23px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  background-color: var(--grey-color-light);
+  border: none;
+  border-radius: 5px;
+  padding: 0px 10px 0px 10px;
+  text-align: center;
+}
+
+.video-thumbnail-holder-upload {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-general {
+  height: 35px;
+  max-width: 125px;
+  min-width: 65px;
+  color: white;
+  background-color: #9d9d9d;
+  border-radius: 10px;
+  border: none;
+  text-align: center;
+}
+
+.user-add-button-possition {
+  position: absolute;
+  left: 83%;
+  top: 12%;
+}
+
+.user-add-button-possition-edit {
+  z-index: 99;
+  position: absolute;
+  left: 79%;
+}
+
+.user-add-button-possition-patient {
+  position: absolute;
+  left: 84.8%;
+  top: 12%;
+}
+
+.user-add-button-possition-doctor {
+  position: absolute;
+  left: 80%;
+  top: 12%;
+}
+
+.user-add-button-possition-edit option {
+  text-align: left;
+}
+
+.user-add-button-possition-remove {
+  position: absolute;
+  left: 83%;
+}
+
+.video-add-button-possition-edit {
+  position: absolute;
+  left: 81.5%;
+}
+
+.video-add-button-possition-remove {
+  position: absolute;
+  left: 86.2%;
+}
+/* NavBar */
+
+.navBar ul {
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+  padding: 0;
+}
+
+.navBar ul li {
+  margin: 0 10px;
+}
+
+.navBar ul li a {
+  color: black;
+  text-decoration: none;
+}
+
+.navBar ul li a.active {
+  color: red;
+}
+
+/* Login Page */
+
+.login-form {
+  background-color: #d9d9d9;
+  font-weight: 400;
+  font-size: 12px;
+  position: absolute;
+  width: 626px;
+  height: 452px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 20px;
+}
+
+.login-input {
+  font-size: 12px;
+  width: 442px;
+  height: var(--height);
+  top: 50%;
+  left: 50%;
+  transform: translate(20%, 10%);
+  border: none;
+}
+
+.login-button {
+  color: white;
+  background-color: #9d9d9d;
+  width: fit-content;
+  height: fit-content;
+  border-radius: 10px;
+  border: none;
+  padding: 10px 20px;
+  margin-left: -100px;
+  gap: 10px;
+  position: absolute;
+  top: calc(50% + 56px);
+  left: calc(50% + 221px);
+}
+
+.login-name {
+  font-size: 12px;
+  position: relative;
+  margin-left: 90px;
+}
+.login-password {
+  font-size: 12px;
+  position: relative;
+  margin-left: 90px;
+}
+
+.login-form-content {
+  margin-top: 100px;
+}
+
+/* User Page*/
+
+.users-select {
+  display: flex;
+  align-self: flex-end;
+}
+
+/* Edit User Page */
+
+.edit-user-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.edit-user-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px 40px;
+  width: 60%;
+}
+
+.edit-user-form-input {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-user-form input {
+  margin-top: 5px;
+}
+
+.edit-user-form-label {
+  margin-bottom: 10px;
+}
+
+.edit-user-form-input {
+  width: 440px;
+  height: 80px;
+}
+
+/* Doctor User Page */
+
+.doctorForm {
+  margin-top: 45px;
+  margin-left: 180px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px 200px;
+  width: 60%;
+  color: #000;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.doctorForm div {
+  margin-bottom: 8px;
+  margin-top: var(--margin-top);
+}
+
+.doctor_title_dropdown_title {
+  width: 104px;
+  height: var(--height);
+}
+
+.doctor_title_dropdown_big {
+  width: 442px;
+  height: var(--height);
+}
+
+.doctor_title_dropdown_state {
+  width: 182px;
+  height: 29px;
+  margin-right: 11px;
+}
+
+.doctor_title_dropdown_zip {
+  width: 249px;
+  height: var(--height);
+}
+
+.doctor_dropdown_terms {
+  width: 104px;
+  height: var(--height);
+  margin-right: 30px;
+}
+
+.doctor_locations_list {
+  width: 506px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: -30px;
+  margin-left: 5px;
+}
+
+.doctor_library {
+  margin-left: 5px;
+}
+.doctor_title_dropdown_library {
+  width: 508px;
+  height: var(--height);
+  margin-top: -30px !important;
+}
+.users_address2 {
+  display: flex;
+  margin-top: -30px !important;
+}
+
+.users_verificaiton {
+  margin-top: 0 !important;
+  display: flex;
+}
+
+.users_list_box {
+  margin-top: -10px !important;
+  border: 1px solid black;
+  width: 506px;
+}
+
+.users_list_box div {
+  font-size: 14px;
+  margin-left: 10px;
+}
+
+.position-doctor-cancel {
+  margin-left: 360px;
+}
+
+.position-doctor-save {
+  margin-left: 18px;
+}
+
+.button-general-doctor-container {
+  margin-top: 0px !important;
+  display: flex;
+}
+
+.position-company-cancel {
+  margin-left: 355px;
+}
+
+.position-company-save {
+  margin-left: 22px;
+}
+
+/* Patiant User Page */
+
+.patiantPageForm {
+  margin-top: 45px;
+  margin-left: 180px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px 40px;
+  width: 60%;
+}
+
+.patientForm {
+  margin-top: 45px;
+  margin-left: 180px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px 200px;
+  width: 60%;
+  color: #000;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.patientForm div {
+  margin-bottom: 8px;
+  margin-top: var(--margin-top);
+}
+
+.patient_title_dropdown_title {
+  width: 104px;
+  height: var(--height);
+}
+
+.patient_title_dropdown_big {
+  width: 442px;
+  height: var(--height);
+}
+
+.patient_title_dropdown_state {
+  width: 182px;
+  height: 29px;
+  margin-right: 11px;
+}
+
+.patient_title_dropdown_zip {
+  width: 249px;
+  height: var(--height);
+}
+
+.patient_dropdown_terms {
+  width: 104px;
+  height: var(--height);
+  margin-right: 30px;
+}
+.patient_dropdown_terms-language {
+  width: 370px;
+  height: var(--height);
+  margin-right: 30px;
+}
+
+.patient_locations_list {
+  width: 506px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: -30px;
+  margin-left: 5px;
+}
+
+.patient_library {
+  margin-left: 5px;
+}
+.patient_title_dropdown_library {
+  width: 495px;
+  height: var(--height);
+  margin-top: -30px !important;
+}
+.users_address2 {
+  display: flex;
+  margin-top: -30px !important;
+}
+
+.users_verificaiton {
+  display: flex;
+}
+
+.users_list_box {
+  margin-top: -10px !important;
+  border: 1px solid black;
+  width: 506px;
+}
+
+.button-general-patient-container {
+  margin-top: 0 !important;
+  display: flex;
+}
+.button-general-patient-save {
+  margin-left: 22px;
+}
+
+.button-general-patient-cancel {
+  margin-left: 350px;
+}
+
+.button-classic-doctors-add {
+  margin-top: 10px;
+}
+
+/* Company  Page*/
+
+.organization-add-button-possition-edit {
+  z-index: 99;
+  position: absolute;
+  left: 77%;
+}
+/* Company Edit Page*/
+
+.company_form {
+  margin-top: 45px;
+  margin-left: 180px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px 200px;
+  width: 60%;
+  color: #000;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.company_form div {
+  margin-bottom: 8px;
+  margin-top: var(--margin-top);
+}
+
+.company_title_dropdown_big {
+  width: 442px;
+  height: var(--height);
+}
+
+.button-general-company-send {
+  margin-left: 1180px;
+  margin-right: 22px;
+}
+
+.company_form_dropdown_state {
+  margin-top: -30px !important;
+  display: flex;
+}
+
+.company_title_dropdown_state {
+  width: 182px;
+  height: 29px;
+  margin-right: 11px;
+}
+
+.company_title_dropdown_zip {
+  width: 249px;
+  height: var(--height);
+}
+
+.company_form_doctor_checkboxes {
+  font-size: 14px;
+  width: 506px;
+  height: 214px;
+  border: 1px solid black;
+}
+
+.company_form_patient_checkboxes {
+  font-size: 14px;
+  width: 506px;
+  height: 214px;
+  border: 1px solid black;
+}
+
+.company_form_buttons {
+  display: flex;
+}
+
+/*  Video Page*/
+
+.video-add-button-possition {
+  position: absolute;
+  left: 84.5%;
+  top: 12%;
+}
+/* Edit Video Page*/
+
+.thumnail-holder {
+  position: relative;
+}
+
+.video-thumbnail-container {
+  background-size: cover;
+  background-position: center;
+}
+
+.video-thumbnail-holder {
+  background-color: var(--grey-color-dark);
+  width: 100px;
+  font-size: 12px;
+  height: 20px;
+  position: absolute;
+  margin-top: 39px;
+  margin-left: -21px;
+}
+
+.video-video-holder {
+  background-color: var(--grey-color-dark);
+  width: 100px;
+  height: 20px;
+  font-size: 12px;
+  position: absolute;
+  margin-top: 39px;
+  margin-left: -21px;
+}
+
+.video-container {
+  margin-top: 85px;
+  margin-left: 140px;
+}
+.video-form {
+  margin-top: 70px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 40px;
+  margin-right: 275px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.thumbnail-upload {
+  width: 100px;
+  height: 100px;
+  /* margin-right: 40px; */
+  background-color: #5f4949;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+}
+
+.video-upload {
+  width: 100px;
+  height: 100px;
+  background-color: #5f4949;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+}
+
+.video_edit_veritcal_scroll {
+  margin-top: 75px;
+  margin-right: 275px;
+  overflow-y: auto;
+  max-height: 370px;
+}
+
+.video-form-scroll {
+  /* margin-top: 70px; */
+  margin-bottom: 20px;
+  /* margin-right: 500px; */
+  display: grid;
+  grid-template-columns: repeat(10, 1fr); /* Adjust the number of columns as needed */
+  gap: 18px; /* Set the desired gap between items */
+  justify-items: center; /* Centers items horizontally within each grid cell */
+  align-items: center; /* Centers items vertically within each grid cell */
+  text-align: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e1dfdf;
+}
+
+.video-edit-label {
+  display: inline-flex;
+}
+
+.video-edit-label-name {
+  display: grid;
+  justify-items: start;
+  margin-right: 42px;
+}
+
+.video-edit-label-name input {
+  margin-top: 5px;
+  width: 442px;
+  height: var(--height);
+}
+
+.video-edit-label-prescribed {
+  display: grid;
+  justify-items: start;
+}
+
+.video-edit-label-prescribed select {
+  margin-top: 5px;
+  width: 182px;
+  height: 29px;
+}
+
+.video-edit-label-column {
+  display: grid;
+  justify-items: start;
+}
+
+.video-edit-label-column select {
+  margin-top: 3px;
+  width: 194px;
+  height: 29px;
+}
+
+.video-edit-label-column input {
+  margin-top: 5px;
+  width: 182px;
+  height: 22px;
+}
+
+.video-edit-label-url {
+  display: grid;
+  justify-items: start;
+}
+
+.video-edit-label-url input {
+  margin-top: 5px;
+  width: 340px;
+  height: 22px;
+}
+
+.video-cc-edit-label-url-input {
+  width: 264px !important;
+  margin-right: 20px !important;
+}
+
+.video-cc-edit-label-url-input-button {
+  margin-top: 8px;
+}
+.video-closed-caption {
+  display: flex;
+}
+
+.video-descripiton {
+  max-width: 340px;
+  max-height: 93px;
+  width: 340px;
+  height: 93px;
+}
+
+.button-general-video-send {
+  margin-bottom: 216px;
+  margin-top: 60px;
+  margin-left: 1337px;
+  margin-right: 22px;
+}
+/*  Library Page*/
+.library-td-possition td {
+  padding-bottom: 45px;
+}
+
+.library-add-button-possition-edit {
+  z-index: 99;
+  position: absolute;
+  left: 78%;
+}
+
+/* Edit Library Page*/
+
+.modal-library-add-video-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+.video-thumbnail-container-modal {
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 90px;
+  margin-right: 30px;
+}
+
+.library-edit-add-container {
+  margin-top: 45px;
+  margin-left: 180px;
+}
+
+.library-edit-add-buttons {
+  margin-top: 120px;
+  display: flex;
+  justify-content: end;
+}
+
+.button-general-library-send {
+  margin-left: 950px;
+  margin-right: 22px;
+}
+
+.button-general-library-close {
+  margin-top: 25px;
+}
+.library-edit-label {
+  display: grid;
+  justify-items: start;
+}
+
+.library-edit-label input {
+  margin-top: 5px;
+  width: 442px;
+  height: 21px;
+  margin-bottom: 52px;
+  border: none;
+  border: 1px solid gray;
+}
+
+.library-edit-label-package {
+  display: flex;
+  justify-content: space-between;
+}
+
+.library-edit-label-package input {
+  margin-top: 5px;
+  width: 442px;
+  height: 21px;
+  margin-bottom: 52px;
+  border: none;
+  border: 1px solid gray;
+}
+
+.button-edit-library-add {
+  margin-bottom: 23px;
+}
+
+.library-add-video-button {
+  margin-left: 37%;
+  margin-top: 28%;
+  margin-bottom: 45%;
+}
+
+.ReactModal__Overlay {
+  z-index: 2;
+}
+
+/* Carousel*/
+
+.videos-container {
+  width: 1100px;
+}
+.embla_container_max {
+  position: relative;
+  padding-left: 50px;
+  padding-right: 50px;
+  width: 967px;
+}
+.embla {
+  width: 967px;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.embla_button {
+  z-index: 1;
+  position: absolute;
+  background-color: transparent;
+  border: none;
+  padding: 1em;
+  font-size: 1.5em;
+}
+
+.embla_button:nth-child(1) {
+  top: 20%;
+  left: -2%;
+  transform: translateY(-50%);
+}
+
+.embla_button:nth-child(3) {
+  top: 20%;
+  left: 96%;
+  transform: translateY(-50%);
+}
+
+.embla__viewport {
+  width: 100%;
+  height: 100%;
+}
+
+.embla__container {
+  display: flex;
+  width: 100%;
+  height: 200px;
+  margin-left: 20px;
+}
+
+.embla__slide {
+  height: 74px;
+  position: relative;
+  border-radius: 5px;
+  flex: 0 0 auto;
+  width: calc((100% - 0rem) / 8); /* Adjust here for the number of slides you want to show */
+  width: 109px;
+  margin-bottom: 10px;
+  margin-left: 12px;
+  background: rgb(23, 192, 200);
+  background-image: url(''); /* Will be overridden by inline styles */
+  background-size: cover;
+  background-position: center;
+}
+
+.embla__slide__inner {
+  padding: 1em;
+  text-align: center;
+}
+
+.embla__slide__content {
+  margin: auto;
+  margin-top: 60px;
+}
+
+.embla__slide[style] {
+  position: relative !important;
+  z-index: 5000 !important;
+  opacity: 1 !important;
+}
