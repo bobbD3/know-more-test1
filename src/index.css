@@ -664,13 +664,13 @@ input {
 .video-edit-label-column select {
   margin-top: 3px;
   width: 194px;
-  height: 40px;
+  height: 29px;
 }
 
 .video-edit-label-column input {
-  margin-top: -2px;
+  margin-top: 5px;
   width: 182px;
-  height: 32px;
+  height: 22px;
 }
 
 .video-edit-label-url {
@@ -679,9 +679,9 @@ input {
 }
 
 .video-edit-label-url input {
-  margin-top: 1px;
+  margin-top: 5px;
   width: 340px;
-  height: var(--video-height);
+  height: 22px;
 }
 
 .video-cc-edit-label-url-input {
