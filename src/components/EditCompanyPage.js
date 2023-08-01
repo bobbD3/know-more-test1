@@ -3,7 +3,8 @@ import { Link, useParams, useNavigate } from 'react-router-dom'
 import { HospitalsContext } from '../contexts/HospitalsContext'
 
 const EditCompanyPage = () => {
-  const { hospitals, updateHospital } = useContext(HospitalsContext)
+  const { hospitals, manageOrganization, doctors, patients } = useContext(HospitalsContext)
+
   const [locationName, setLocationName] = useState('')
   const [address, setAddress] = useState('')
   const [city, setCity] = useState('')
@@ -15,61 +16,66 @@ const EditCompanyPage = () => {
 
   const navigate = useNavigate()
   // Get the id from the URL
-  let { id } = useParams()
-  id = parseInt(id)
+  let { OrganizationId } = useParams()
 
-  // Run this effect when the component mounts and whenever the id changes
+  // Run this effect when the component mounts and whenever the Id changes
   useEffect(() => {
     // Find the corresponding hospital
-    const hospital = hospitals.find(h => h.id === id)
+    const hospital = hospitals.find(h => h?.OrganizationId === Number(OrganizationId))
 
-    // If the hospital exists, update the state
     if (hospital) {
-      setLocationName(hospital.name)
-      setAddress(hospital.address1)
-      setPhone(hospital.mobile)
+      // If the hospital exists, update the state
+      setLocationName(hospital.Name || '')
+      setAddress(hospital.Address || '')
+      setPhone(hospital.Phone || '')
+      setCity(hospital.City || '')
+      setZip(hospital.Zip || '')
+      // Extract doctor and patient IDs
+      const doctorIds = hospital.Doctors
+      const patientIds = hospital.Patients
+      setSelectedDoctors(doctorIds)
+      setSelectedPatients(patientIds)
+    } else {
+      // If the hospital does not exist, reset all fields to their default values
+      setLocationName('')
+      setAddress('')
+      setPhone('')
+      setCity('')
+      setZip('')
+      setSelectedDoctors([])
+      setSelectedPatients([])
     }
-  }, [id, hospitals])
-
-  const doctors = [
-    { id: 1, name: 'Doctor 1' },
-    { id: 2, name: 'Doctor 2' },
-    { id: 3, name: 'Doctor 3' }
-    // Add more doctors as needed
-  ]
-
-  const patients = [
-    { id: 1, name: 'Patient 1' },
-    { id: 2, name: 'Patient 2' },
-    { id: 3, name: 'Patient 3' }
-    // Add more patients as needed
-  ]
+  }, [OrganizationId, hospitals])
 
   const handleFormSubmit = event => {
     event.preventDefault()
 
-    const updatedHospital = {
-      id,
-      name: locationName,
-      address1: address,
-      mobile: phone,
-      city,
-      zip,
-      state,
-      doctors: selectedDoctors,
-      patients: selectedPatients
-      // add other fields here as necessary
+    const organizationData = {
+      Name: locationName,
+      Phone: phone,
+      Address: address,
+      City: city,
+      StateId: '', // TODO: add a state for StateId and map it with selected state
+      Zip: zip,
+      DoctorIds: selectedDoctors,
+      PatientIds: selectedPatients
     }
 
-    updateHospital(updatedHospital)
+    console.log(`It is working!`)
+    // Include the OrganizationId only if Id is defined
+    if (OrganizationId) {
+      organizationData.OrganizationId = OrganizationId
+    }
 
+    console.log(organizationData)
+    manageOrganization(organizationData)
     navigate('/company')
   }
 
   const handleDoctorCheckboxChange = doctorId => {
     setSelectedDoctors(prevSelectedDoctors => {
       if (prevSelectedDoctors.includes(doctorId)) {
-        return prevSelectedDoctors.filter(id => id !== doctorId)
+        return prevSelectedDoctors.filter(Id => Id !== doctorId)
       } else {
         return [...prevSelectedDoctors, doctorId]
       }
@@ -78,13 +84,22 @@ const EditCompanyPage = () => {
 
   const handlePatientCheckboxChange = patientId => {
     setSelectedPatients(prevSelectedPatients => {
+      // Here we clone the previous state to ensure that we are not mutating it directly.
+      let updatedSelectedPatients = [...prevSelectedPatients]
+
       if (prevSelectedPatients.includes(patientId)) {
-        return prevSelectedPatients.filter(id => id !== patientId)
+        // If the patientId is already in the array, we remove it.
+        updatedSelectedPatients = updatedSelectedPatients.filter(Id => Id !== patientId)
       } else {
-        return [...prevSelectedPatients, patientId]
+        // Otherwise, we add it.
+        updatedSelectedPatients.push(patientId)
       }
+
+      return updatedSelectedPatients
     })
   }
+
+  if (!hospitals) return <div>Loading...</div>
 
   return (
     <div>
@@ -123,11 +138,20 @@ const EditCompanyPage = () => {
           {/* Doctors Information */}
           <div>Doctors Information</div>
           <div className='company_form_doctor_checkboxes'>
-            {doctors.map(doctor => (
-              <div key={doctor.id}>
+            {/* {doctors.map(doctor => (
+              <div key={doctor.Id}>
                 <label>
-                  <input type='checkbox' checked={selectedDoctors.includes(doctor.id)} onChange={() => handleDoctorCheckboxChange(doctor.id)} />
-                  {doctor.name}
+                  <input type='checkbox' checked={hospitals.Doctors.includes(doctor.Id)} onChange={() => handleDoctorCheckboxChange(doctor.Id)} />
+                  {`${doctor.FirstName} ${doctor.LastName}`}
+                </label>
+              </div>
+            ))} */}
+
+            {doctors.map(doctor => (
+              <div key={doctor.Id}>
+                <label>
+                  <input type='checkbox' checked={selectedDoctors.includes(doctor.Id)} onChange={() => handleDoctorCheckboxChange(doctor.Id)} />
+                  {`${doctor.FirstName} ${doctor.LastName}`}
                 </label>
               </div>
             ))}
@@ -136,11 +160,20 @@ const EditCompanyPage = () => {
           {/* Patients Information */}
           <div>Patients Information</div>
           <div className='company_form_patient_checkboxes'>
-            {patients.map(patient => (
-              <div key={patient.id}>
+            {/* {patients.map(patient => (
+              <div key={patient.Id}>
                 <label>
-                  <input type='checkbox' checked={selectedPatients.includes(patient.id)} onChange={() => handlePatientCheckboxChange(patient.id)} />
-                  {patient.name}
+                  <input type='checkbox' checked={hospitals.Patients.includes(patient.Id)} onChange={() => handlePatientCheckboxChange(patient.Id)} />
+                  {`${patient.FirstName} ${patient.LastName}`}
+                </label>
+              </div>
+            ))} */}
+
+            {patients.map(patient => (
+              <div key={patient.Id}>
+                <label>
+                  <input type='checkbox' checked={selectedPatients.includes(patient.Id)} onChange={() => handlePatientCheckboxChange(patient.Id)} />
+                  {`${patient.FirstName} ${patient.LastName}`}
                 </label>
               </div>
             ))}
@@ -152,10 +185,10 @@ const EditCompanyPage = () => {
             <button className='button-general position-company-cancel' type='button'>
               Cancel
             </button>
-            <button className='button-general position-company-save' type='submit'>
-              {id ? 'Save' : 'Create'}
-            </button>
           </Link>
+          <button className='button-general position-company-save' type='submit'>
+            {OrganizationId ? 'Save' : 'Create'}
+          </button>
         </div>
       </form>
     </div>

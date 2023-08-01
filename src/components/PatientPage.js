@@ -1,67 +1,71 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { UsersContext } from '../contexts/UserContext'
-import dummyUsers from '../data/data'
+// import dummyUsers from '../data/data'
 
 const initialFormState = {
   id: Date.now(),
   title: '',
   firstName: '',
   lastName: '',
-  role: 'Patient',
+  role: 3,
   address1: '',
   city: '',
   state: '',
   zip: '',
-  email: '',
+  Email: '',
   mobile: '',
-  confirmEmail: 'No',
-  confirmPhone: 'No',
   confirmPolicy: 'No',
   language: 'English'
 }
 
-const roles = ['Patient']
-const states = ['Alabama', 'Alaska']
 const titles = ['Mr', 'Ms']
 const confirmationOptions = ['Yes', 'No']
-const languages = ['English', 'Non-English']
 
 const PatientPage = () => {
-  const { users, setUsers } = useContext(UsersContext)
+  const { users, states, languages, roles, manageUser, fetchUsers } = useContext(UsersContext)
+  console.log(`Patienrs Page:`)
+  console.log(users)
   const [selectedDoctors, setSelectedDoctors] = useState([])
-  const [formState, setFormState] = useState(initialFormState)
+  const [formState, setFormState] = useState({
+    ...initialFormState,
+    state: states.length > 0 ? states[0].Name : '',
+    language: languages.length > 0 ? languages[0].Name : ''
+  })
+
   const navigate = useNavigate()
-  const { id } = useParams()
-  const user = users.find(user => user.Id === Number(id))
+  const { UserId } = useParams()
+  const user = users.find(user => user.UserId === Number(UserId))
 
   useEffect(() => {
     if (user) {
+      const roleExists = roles.some(role => role.RoleId === user.RoleId)
+      console.log(roleExists)
+      const role = roleExists ? user.RoleId : roles[0]?.RoleId || ''
+      console.log(role)
+
       setFormState({
-        id: user.Id,
+        UserId: user.UserId,
         title: user.Title,
         firstName: user.FirstName,
         lastName: user.LastName,
-        role: user.Role,
+        role: role, // change this line
         address1: user.Address,
         city: user.City,
         state: user.State,
         zip: user.Zip,
-        email: user.Email,
-        mobile: user.MobileNumber,
-        confirmEmail: user.EmailSubscribed === 1 ? 'Yes' : 'No', // assuming 1 is 'Yes' and 0 is 'No'
-        confirmPhone: user.SMSSubscribed === 1 ? 'Yes' : 'No', // same as above
-        confirmPolicy: user.HasAcceptedTerms === 1 ? 'Yes' : 'No', // same as above
+        Email: user.Email,
+        mobile: user.MobilePhone,
+        confirmPolicy: user.AcceptedTerms === 1 ? 'Yes' : 'No',
         language: user.Language
       })
-      // you may want to also set selectedDoctors here, if your user data includes that
     }
-  }, [user])
+  }, [user, roles])
 
   const handleCheckChange = doctorId => {
     setSelectedDoctors(prevState => {
       if (prevState.includes(doctorId)) {
-        return prevState.filter(id => id !== doctorId)
+        return prevState.filter(UserId => UserId !== doctorId)
       } else {
         return [...prevState, doctorId]
       }
@@ -73,18 +77,43 @@ const PatientPage = () => {
 
   const handleSubmit = event => {
     event.preventDefault()
+    const role = roles.find(role => role.RoleId === formState.role)
+    const language = languages.find(lang => lang.Name === formState.language)
+    const state = states.find(state => state.Name === formState.state)
+
+    const userData = {
+      UserId: formState.UserId,
+      RoleId: role?.RoleId, // use the RoleId of the role from context
+      LanguageId: language?.Id || 1, // use the Id of the language from context
+      AcceptedTerms: formState.confirmPolicy === 'Yes' ? 1 : 0,
+      FirstName: formState.firstName,
+      LastName: formState.lastName,
+      Email: formState.Email,
+      MobilePhone: formState.mobile,
+      Address: formState.address1,
+      City: formState.city,
+      StateId: state?.Id, // use the Id of the state from context
+      Zip: formState.zip,
+      // OrganizationIds: selectedDoctors,
+      OrganizationIds: [],
+      LibraryIds: formState.libraryIds || [] // Added logic for library Ids
+    }
+
     if (user) {
       // update existing user
-      setUsers(users.map(u => (u.Id === user.Id ? { ...u, ...formState } : u)))
+      manageUser(userData)
     } else {
       // add new user
-      setUsers([...users, { ...formState, Id: Date.now() }])
+      manageUser({ ...userData })
     }
+
+    console.log(userData)
     setFormState(initialFormState)
+    fetchUsers()
     navigate('/users')
   }
 
-  const doctors = dummyUsers.filter(user => user.role === 'Doctor')
+  const doctors = users.filter(user => user.Role === 'Physician')
 
   return (
     <div>
@@ -102,14 +131,7 @@ const PatientPage = () => {
           <input className='patient_title_dropdown_big' name='firstName' value={formState.firstName} onChange={handleChange} placeholder='First Name' />
           <div>Last Name</div>
           <input className='patient_title_dropdown_big' name='lastName' value={formState.lastName} onChange={handleChange} placeholder='Last Name' />
-          <div>Role: {roles[0]}</div>
-          {/* <select className='patient_title_dropdown_title' name='roles' value={formState.roles} onChange={handleChange}>
-            {roles.map((roles, index) => (
-              <option value={roles} key={index}>
-                {roles}
-              </option>
-            ))}
-          </select> */}
+          <div>Role: {roles.find(role => role.SystemCode === 'PAT')?.Name}</div>
           <div>Address</div>
           <input className='patient_title_dropdown_big' name='address1' value={formState.address1} onChange={handleChange} placeholder='Address' />
           <div>City</div>
@@ -117,10 +139,10 @@ const PatientPage = () => {
           <div className='users_address2'>
             <div>
               <div>States</div>
-              <select className='patient_title_dropdown_state' name='states' value={formState.states} onChange={handleChange}>
+              <select className='patient_title_dropdown_state' name='state' value={formState.state} onChange={handleChange}>
                 {states.map((state, index) => (
-                  <option value={state} key={index}>
-                    {state}
+                  <option value={state.Name} key={index}>
+                    {state.Name}
                   </option>
                 ))}
               </select>
@@ -131,22 +153,12 @@ const PatientPage = () => {
             </div>
           </div>
           <div>Email</div>
-          <input className='patient_title_dropdown_big' name='email' value={formState.email} onChange={handleChange} placeholder='Email' />
+          <input className='patient_title_dropdown_big' name='email' value={formState.Email} onChange={handleChange} placeholder='Email' />
           <div>Mobile</div>
           <input className='patient_title_dropdown_big' name='mobile' value={formState.mobile} onChange={handleChange} placeholder='Mobile' />
         </div>
         <section>
           <div className='users_verificaiton'>
-            {/* <div>
-              <div>Verified Mobile</div>
-              <select className='patient_dropdown_terms' name='confirmPhone' value={formState.confirmPhone} onChange={handleChange}>
-                {confirmationOptions.map((option, index) => (
-                  <option value={option} key={index}>
-                    {option}
-                  </option>
-                ))}
-              </select>
-            </div> */}
             <div>
               <div>Accepted Terms</div>
               <select className='patient_dropdown_terms' name='confirmPolicy' value={formState.confirmPolicy} onChange={handleChange}>
@@ -161,35 +173,25 @@ const PatientPage = () => {
               <div>Language</div>
               <select className='patient_dropdown_terms-language' name='language' value={formState.language} onChange={handleChange}>
                 {languages.map((language, index) => (
-                  <option value={language} key={index}>
-                    {language}
+                  <option value={language.Name} key={index}>
+                    {language.Name}
                   </option>
                 ))}
               </select>
             </div>
-            {/* <div>
-              <div>Verified Email</div>
-              <select className='patient_dropdown_terms' name='confirmEmail' value={formState.confirmEmail} onChange={handleChange}>
-                {confirmationOptions.map((option, index) => (
-                  <option value={option} key={index}>
-                    {option}
-                  </option>
-                ))}
-              </select>
-            </div> */}
           </div>
           <div className='doctor_locations_list'>
             <div>Doctors</div>
-            <button className='button-classic button-classic-doctors-add' type='button'>
+            {/* <button className='button-classic button-classic-doctors-add' type='button'>
               Add
-            </button>
+            </button> */}
           </div>
           <div className='users_list_box'>
             {doctors.map((doctor, index) => (
               <div key={index}>
                 <label>
-                  <input type='checkbox' checked={selectedDoctors.includes(doctor.id)} onChange={() => handleCheckChange(doctor.id)} />
-                  {doctor.title} {doctor.firstName} {doctor.lastName}
+                  <input type='checkbox' checked={selectedDoctors.includes(doctor.UserId)} onChange={() => handleCheckChange(doctor.UserId)} />
+                  {doctor.Title} {doctor.FirstName} {doctor.LastName}
                 </label>
               </div>
             ))}

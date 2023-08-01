@@ -3,10 +3,15 @@ import { Link } from 'react-router-dom'
 import { HospitalsContext } from '../contexts/HospitalsContext'
 
 const CompanyPage = () => {
-  const { hospitals, setHospitals } = useContext(HospitalsContext)
+  const { hospitals, loading, deleteHospital } = useContext(HospitalsContext)
+  console.log(hospitals)
 
-  const removeUser = id => {
-    setHospitals(hospitals.filter(user => user.id !== id))
+  const removeHospital = OrganizationId => {
+    deleteHospital(OrganizationId.toString())
+  }
+
+  if (loading) {
+    return <div>Loading...</div>
   }
 
   return (
@@ -20,18 +25,18 @@ const CompanyPage = () => {
           </tr>
         </thead>
         <tbody>
-          {hospitals.map(user => (
-            <tr key={user.id}>
-              <td>{user.name}</td>
-              <td>{user.address1}</td>
-              <td>{user.mobile}</td>
+          {hospitals.map(org => (
+            <tr key={org.OrganizationId}>
+              <td>{org.Name}</td>
+              <td>{org.Address}</td>
+              <td>{org.Phone}</td>
               <td className='organization-add-button-possition-edit'>
-                <Link to={`/edit-company/${user.id}`}>
+                <Link to={`/edit-company/${org.OrganizationId}`}>
                   <button className='button-classic '>Edit Organization</button>
                 </Link>
               </td>
               <td className='user-add-button-possition-remove'>
-                <button className='button-classic' onClick={() => removeUser(user.id)}>
+                <button className='button-classic' onClick={() => removeHospital(org.OrganizationId)}>
                   Remove
                 </button>
               </td>

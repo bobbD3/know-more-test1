@@ -1,66 +1,73 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { UsersContext } from '../contexts/UserContext'
-import dummyHospitals from '../data/hospitals'
+import { HospitalsContext } from '../contexts/HospitalsContext'
+
+// import dummyHospitals from '../data/hospitals'
 
 const initialFormState = {
-  Id: Date.now(),
-  Title: '',
-  FirstName: '',
-  LastName: '',
-  Role: 'Doctor',
-  Address1: '',
-  City: '',
-  State: '',
-  Zip: '',
+  id: Date.now(),
+  title: '',
+  firstName: '',
+  lastName: '',
+  role: 2,
+  address1: '',
+  city: '',
+  state: '',
+  zip: '',
   Email: '',
-  Mobile: '',
-  ConfirmEmail: 'No',
-  ConfirmPhone: 'No',
-  ConfirmPolicy: 'No',
-  Language: 'English'
+  mobile: '',
+  confirmEmail: 'No',
+  confirmPhone: 'No',
+  confirmPolicy: 'No',
+  language: 'English',
+  SSOID: ''
 }
 
-const roles = ['Doctor']
-const states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louis']
 const titles = ['Mr', 'Ms', 'Dr']
 const confirmationOptions = ['Yes', 'No']
-const languages = ['English', 'Non-English']
 const library = ['New Library 1	', 'New Library 2', 'New Library 3']
 
 const DoctorPage = () => {
-  const { users, setUsers } = useContext(UsersContext)
-  const [formState, setFormState] = useState(initialFormState)
+  const { hospitals } = useContext(HospitalsContext)
+  const { users, states, languages, roles, manageUser, fetchUsers } = useContext(UsersContext)
+  const [formState, setFormState] = useState({
+    ...initialFormState,
+    state: states.length > 0 ? states[0].Name : '',
+    language: languages.length > 0 ? languages[0].Name : ''
+  })
   const [selectedHospitals, setSelectedHospitals] = useState([])
-  const [isEditing, setIsEditing] = useState(false)
-  const { id } = useParams()
   const navigate = useNavigate()
 
-  const user = users.find(user => user.Id === Number(id))
+  const { UserId } = useParams()
+  const user = users.find(user => user.UserId === Number(UserId))
   // Fetch the user's data when the page loads
 
   useEffect(() => {
     if (user) {
+      const roleExists = roles.some(role => role.RoleId === user.RoleId)
+      console.log(roleExists)
+      const role = roleExists ? user.RoleId : roles[0]?.RoleId || ''
+      console.log(role)
+
       setFormState({
-        id: user.Id,
+        UserId: user.UserId, // only on update
         title: user.Title,
         firstName: user.FirstName,
         lastName: user.LastName,
-        role: user.Role,
+        role: role, // change this line
         address1: user.Address,
         city: user.City,
         state: user.State,
         zip: user.Zip,
-        email: user.Email,
-        mobile: user.MobileNumber,
-        confirmEmail: false, // these fields are not in the user data, you may need to handle them differently
-        confirmPhone: false, // same as above
-        confirmPolicy: user.HasAcceptedTerms === 1,
-        language: user.Language
+        Email: user.Email,
+        mobile: user.MobilePhone,
+        confirmPolicy: user.AcceptedTerms === 1 ? 'Yes' : 'No',
+        language: user.Language,
+        SSOID: user.SSOID
       })
-      setIsEditing(true)
     }
-  }, [user])
+  }, [user, roles])
 
   const handleCheckChangeHospital = hospitalsId => {
     setSelectedHospitals(prevState => {
@@ -72,22 +79,45 @@ const DoctorPage = () => {
     })
   }
 
-  const hospitals = dummyHospitals
-
   const handleChange = event => {
     setFormState({ ...formState, [event.target.name]: event.target.value })
   }
 
   const handleSubmit = event => {
     event.preventDefault()
+    const role = roles.find(role => role.RoleId === formState.role)
+    const language = languages.find(lang => lang.Name === formState.language)
+    const state = states.find(state => state.Name === formState.state)
+
+    const userData = {
+      UserId: formState.UserId,
+      RoleId: role?.RoleId,
+      LanguageId: language?.Id || 1,
+      AcceptedTerms: formState.confirmPolicy === 'Yes' ? 1 : 0,
+      FirstName: formState.firstName,
+      LastName: formState.lastName,
+      Email: formState.Email,
+      MobilePhone: formState.mobile,
+      Address: formState.address1,
+      City: formState.city,
+      StateId: state?.Id,
+      Zip: formState.zip,
+      OrganizationIds: selectedHospitals, // add selectedHospitals here
+      LibraryIds: []
+    }
+
     if (user) {
       // update existing user
-      setUsers(users.map(u => (u.Id === user.Id ? { ...u, ...formState } : u)))
+      manageUser(userData)
+      console.log(userData)
     } else {
       // add new user
-      setUsers([...users, { ...formState, Id: Date.now() }])
+      manageUser({ ...userData })
     }
-    setIsEditing(false) // Resetting isEditing state
+
+    console.log(userData)
+    setFormState(initialFormState)
+    fetchUsers()
     navigate('/users')
   }
 
@@ -107,14 +137,7 @@ const DoctorPage = () => {
           <input className='doctor_title_dropdown_big' name='firstName' value={formState.firstName} onChange={handleChange} placeholder='First Name' />
           <div>Last Name</div>
           <input className='doctor_title_dropdown_big' name='lastName' value={formState.lastName} onChange={handleChange} placeholder='Last Name' />
-          <div>Role: {roles[0]}</div>
-          {/* <select className='doctor_title_dropdown_title' name='title' value={formState.roles} onChange={handleChange}>
-            {roles.map((roles, index) => (
-              <option value={roles} key={index}>
-                {roles}
-              </option>
-            ))}
-          </select> */}
+          <div>Role: {roles.find(role => role.SystemCode === 'PHY')?.Name}</div>
           <div>Address</div>
           <input className='doctor_title_dropdown_big' name='address1' value={formState.address1} onChange={handleChange} placeholder='Address' />
           <div>City</div>
@@ -122,10 +145,10 @@ const DoctorPage = () => {
           <div className='users_address2'>
             <div>
               <div>States</div>
-              <select className='doctor_title_dropdown_state' name='title' value={formState.states} onChange={handleChange}>
-                {states.map((states, index) => (
-                  <option value={states} key={index}>
-                    {states}
+              <select className='doctor_title_dropdown_state' name='state' value={formState.state} onChange={handleChange}>
+                {states.map((state, index) => (
+                  <option value={state.Name} key={index}>
+                    {state.Name}
                   </option>
                 ))}
               </select>
@@ -137,22 +160,13 @@ const DoctorPage = () => {
           </div>
 
           <div>Email</div>
-          <input className='doctor_title_dropdown_big' name='email' value={formState.email} onChange={handleChange} placeholder='Email' />
+          <input className='doctor_title_dropdown_big' name='Email' value={formState.Email} onChange={handleChange} placeholder='Email' />
+
           <div>Mobile</div>
           <input className='doctor_title_dropdown_big' name='mobile' value={formState.mobile} onChange={handleChange} placeholder='Mobile' />
         </div>
         <section>
           <div className='users_verificaiton'>
-            {/* <div>
-              <div>Verified Mobile</div>
-              <select className='doctor_dropdown_terms' name='confirmPhone' value={formState.confirmPhone} onChange={handleChange}>
-                {confirmationOptions.map((option, index) => (
-                  <option value={option} key={index}>
-                    {option}
-                  </option>
-                ))}
-              </select>
-            </div> */}
             <div>
               <div>Accepted Terms</div>
               <select className='doctor_dropdown_terms' name='confirmPolicy' value={formState.confirmPolicy} onChange={handleChange}>
@@ -167,35 +181,25 @@ const DoctorPage = () => {
               <div>Language</div>
               <select className='patient_dropdown_terms-language' name='language' value={formState.language} onChange={handleChange}>
                 {languages.map((language, index) => (
-                  <option value={language} key={index}>
-                    {language}
+                  <option value={language.Name} key={index}>
+                    {language.Name}
                   </option>
                 ))}
               </select>
             </div>
-            {/* <div>
-              <div>Verified Email</div>
-              <select className='doctor_dropdown_terms' name='confirmEmail' value={formState.confirmEmail} onChange={handleChange}>
-                {confirmationOptions.map((option, index) => (
-                  <option value={option} key={index}>
-                    {option}
-                  </option>
-                ))}
-              </select>
-            </div> */}
           </div>
           <div className='doctor_locations_list'>
-            <div>Company</div>
-            <button className='button-classic button-classic-doctors-add' type='button'>
+            <div>Organization</div>
+            {/* <button className='button-classic button-classic-doctors-add' type='button'>
               Add
-            </button>
+            </button> */}
           </div>
           <div className='users_list_box'>
             {hospitals.map((hospital, index) => (
               <div key={index}>
                 <label>
-                  <input type='checkbox' checked={selectedHospitals.includes(hospital.id)} onChange={() => handleCheckChangeHospital(hospital.id)} />
-                  {hospital.name} {hospital.address1}
+                  <input type='checkbox' checked={selectedHospitals.includes(hospital.OrganizationId)} onChange={() => handleCheckChangeHospital(hospital.OrganizationId)} />
+                  {hospital.Name} {hospital.Address}
                 </label>
               </div>
             ))}
@@ -219,8 +223,8 @@ const DoctorPage = () => {
               Cancel
             </button>
           </Link>
-          <button className='button-general position-doctor-save' type='submit'>
-            {isEditing ? 'Save' : 'Create'}
+          <button className='button-general button-general-patient-save' type='submit'>
+            {user ? 'Save' : 'Create'}
           </button>
         </div>
       </form>

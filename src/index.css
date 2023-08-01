@@ -210,6 +210,10 @@ input {
   align-self: flex-end;
 }
 
+.user-accepted-terms {
+  text-align: center;
+}
+
 /* Edit User Page */
 
 .edit-user-container {
@@ -297,6 +301,7 @@ input {
   justify-content: space-between;
   margin-bottom: -30px;
   margin-left: 5px;
+  overflow-y: auto;
 }
 
 .doctor_library {
@@ -321,6 +326,8 @@ input {
   margin-top: -10px !important;
   border: 1px solid black;
   width: 506px;
+  height: 320px;
+  overflow-y: auto;
 }
 
 .users_list_box div {
@@ -409,6 +416,7 @@ input {
   width: 370px;
   height: var(--height);
   margin-right: 30px;
+  overflow-y: auto;
 }
 
 .patient_locations_list {
@@ -517,6 +525,7 @@ input {
   width: 506px;
   height: 214px;
   border: 1px solid black;
+  overflow-y: auto;
 }
 
 .company_form_patient_checkboxes {
@@ -524,6 +533,7 @@ input {
   width: 506px;
   height: 214px;
   border: 1px solid black;
+  overflow-y: auto;
 }
 
 .company_form_buttons {
