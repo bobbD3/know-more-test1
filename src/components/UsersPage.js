@@ -67,7 +67,7 @@ const UsersPage = () => {
               <td>{user.Role}</td>
               <td>{user.State}</td>
               <td>{user.Email || '-'}</td>
-              <td>{user.MobileNumber}</td>
+              <td>{user.MobilePhone}</td>
               <td className='user-accepted-terms'>{user.HasAcceptedTerms ? 'Yes' : 'No'}</td>
               <td className='user-add-button-possition-edit'>
                 <Link to={user.RoleId === Number(2) ? `/add-doctors/${user.UserId}` : `/add-patient/${user.UserId}`}>

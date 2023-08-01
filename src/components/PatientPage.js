@@ -153,7 +153,8 @@ const PatientPage = () => {
             </div>
           </div>
           <div>Email</div>
-          <input className='patient_title_dropdown_big' name='email' value={formState.Email} onChange={handleChange} placeholder='Email' />
+          <input className='doctor_title_dropdown_big' name='Email' value={formState.Email} onChange={handleChange} placeholder='Email' />
+
           <div>Mobile</div>
           <input className='patient_title_dropdown_big' name='mobile' value={formState.mobile} onChange={handleChange} placeholder='Mobile' />
         </div>

@@ -52,15 +52,6 @@ export const UsersProvider = ({ children }) => {
       console.log('Error fetching Roles: ', error)
     }
   }
-  const fetchTitles = async () => {
-    // New fetch function for roles
-    try {
-      const response = await axios.post(`${API_BASE_URL}5754d4c3-161b-485f-80e8-8d3533684905`, {})
-      setTitles(response.data)
-    } catch (error) {
-      console.log('Error fetching Roles: ', error)
-    }
-  }
 
   const deleteUser = async UserId => {
     try {
