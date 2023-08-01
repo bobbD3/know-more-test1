@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import LoginForm from './components/LoginForm'
 import NavBar from './components/NavBar/NavBar'
@@ -19,8 +19,12 @@ import { HospitalsProvider } from './contexts/HospitalsContext'
 import dummyLibraries from './data/libraries'
 
 const App = () => {
-  const [loggedIn, setLoggedIn] = useState(false)
+  const [loggedIn, setLoggedIn] = useState(localStorage.getItem('isLoggedIn') === 'true') // Check initial login status from local storage
   const [libraries, setLibraries] = useState(dummyLibraries)
+
+  useEffect(() => {
+    localStorage.setItem('isLoggedIn', loggedIn)
+  }, [loggedIn])
 
   const handleLogin = () => {
     setLoggedIn(true)
@@ -36,10 +40,10 @@ const App = () => {
               <UsersProvider>
                 <Routes>
                   {!loggedIn ? (
-                    <Route path='/' element={<LoginForm onLogin={handleLogin} />} />
+                    <Route path='/login' element={<LoginForm onLogin={handleLogin} />} />
                   ) : (
                     <>
-                      <Route path='/users' element={<UsersPage />} />
+                      <Route path='/' element={<UsersPage />} />
                       <Route path='/company' element={<CompanyPage />} />
                       <Route path='/videos' element={<VideosPage />} />
                       <Route path='/libraries' element={<LibrariesPage />} />

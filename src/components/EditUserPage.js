@@ -48,7 +48,7 @@ const EditUserPage = () => {
     const updatedUsers = users.map(user => (user.id === Number(id) ? formState : user))
 
     setUsers(updatedUsers)
-    navigate('/users')
+    navigate('/')
   }
 
   return (
@@ -64,7 +64,7 @@ const EditUserPage = () => {
         <button className='button-general' type='submit'>
           Save
         </button>
-        <Link to='/users'>
+        <Link to='/'>
           <button className='button-general' type='button'>
             Cancel
           </button>

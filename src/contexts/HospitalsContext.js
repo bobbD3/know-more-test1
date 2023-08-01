@@ -8,6 +8,8 @@ export const HospitalsProvider = ({ children }) => {
   const [doctors, setDoctors] = useState([])
   const [patients, setPatients] = useState([])
   const [loading, setLoading] = useState(true)
+  const [selectedDoctors, setSelectedDoctors] = useState([])
+  const [selectedPatients, setSelectedPatients] = useState([])
 
   const API_BASE_URL = 'https://knowmoreapp.azurewebsites.net/api-noauth/execute-sp/'
 
@@ -45,8 +47,36 @@ export const HospitalsProvider = ({ children }) => {
   }
 
   const manageOrganization = async organizationData => {
-    await axios.post(`${API_BASE_URL}7fe67bd7-9f90-44c2-91b8-22415b253ce6`, organizationData)
-    fetchHospitals() // Fetch hospitals to update the local state after change
+    const response = await axios.post(`${API_BASE_URL}7fe67bd7-9f90-44c2-91b8-22415b253ce6`, organizationData)
+
+    const updatedOrganization = response.data
+    // If OrganizationId exists, update the hospital
+    if (organizationData.OrganizationId) {
+      setHospitals(hospitals.map(hospital => (hospital.OrganizationId === organizationData.OrganizationId ? updatedOrganization : hospital)))
+    } else {
+      // If OrganizationId doesn't exist, add the new hospital
+      setHospitals([...hospitals, updatedOrganization])
+    }
+  }
+
+  const handleDoctorSelection = doctorId => {
+    setSelectedDoctors(prevSelectedDoctors => {
+      if (prevSelectedDoctors.includes(doctorId)) {
+        return prevSelectedDoctors.filter(Id => Id !== doctorId)
+      } else {
+        return [...prevSelectedDoctors, doctorId]
+      }
+    })
+  }
+
+  const handlePatientSelection = patientId => {
+    setSelectedPatients(prevSelectedPatients => {
+      if (prevSelectedPatients.includes(patientId)) {
+        return prevSelectedPatients.filter(Id => Id !== patientId)
+      } else {
+        return [...prevSelectedPatients, patientId]
+      }
+    })
   }
 
   useEffect(() => {
@@ -55,5 +85,5 @@ export const HospitalsProvider = ({ children }) => {
     fetchPatients()
   }, [])
 
-  return <HospitalsContext.Provider value={{ hospitals, loading, deleteHospital, manageOrganization, doctors, patients }}>{children}</HospitalsContext.Provider>
+  return <HospitalsContext.Provider value={{ hospitals, loading, deleteHospital, manageOrganization, doctors, patients, selectedDoctors, selectedPatients, handleDoctorSelection, handlePatientSelection }}>{children}</HospitalsContext.Provider>
 }

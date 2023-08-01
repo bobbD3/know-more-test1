@@ -17,8 +17,11 @@ const LoginForm = ({ onLogin }) => {
       // Call the onLogin prop function to change loggedIn state to true
       onLogin()
 
+      // Store login state in local storage
+      localStorage.setItem('isLoggedIn', true)
+
       // Redirect to the "/users" page after successful login
-      navigate('/users')
+      navigate('/')
     } else {
       // Display an error message or perform other login failure logic
       console.log('Login failed')

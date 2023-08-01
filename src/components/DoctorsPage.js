@@ -62,10 +62,12 @@ const DoctorPage = () => {
         zip: user.Zip,
         Email: user.Email,
         mobile: user.MobilePhone,
-        confirmPolicy: user.AcceptedTerms === 1 ? 'Yes' : 'No',
+        confirmPolicy: user.HasAcceptedTerms === 1 ? 'Yes' : 'No',
         language: user.Language,
         SSOID: user.SSOID
       })
+
+      setSelectedHospitals(user.OrganizationIds || []) // Set selected hospitals to the user's organizations
     }
   }, [user, roles])
 
@@ -83,7 +85,7 @@ const DoctorPage = () => {
     setFormState({ ...formState, [event.target.name]: event.target.value })
   }
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault()
     const role = roles.find(role => role.RoleId === formState.role)
     const language = languages.find(lang => lang.Name === formState.language)
@@ -93,7 +95,7 @@ const DoctorPage = () => {
       UserId: formState.UserId,
       RoleId: role?.RoleId,
       LanguageId: language?.Id || 1,
-      AcceptedTerms: formState.confirmPolicy === 'Yes' ? 1 : 0,
+      HasAcceptedTerms: formState.confirmPolicy === 'Yes' ? 1 : 0,
       FirstName: formState.firstName,
       LastName: formState.lastName,
       Email: formState.Email,
@@ -108,17 +110,17 @@ const DoctorPage = () => {
 
     if (user) {
       // update existing user
-      manageUser(userData)
+      await manageUser(userData)
       console.log(userData)
     } else {
       // add new user
-      manageUser({ ...userData })
+      await manageUser({ ...userData })
     }
 
     console.log(userData)
+    fetchUsers() // Ensures that this function always runs after manageUser
     setFormState(initialFormState)
-    fetchUsers()
-    navigate('/users')
+    navigate('/')
   }
 
   return (
@@ -218,7 +220,7 @@ const DoctorPage = () => {
           Send Invite
         </button>
         <div className='button-general-doctor-container'>
-          <Link to='/users'>
+          <Link to='/'>
             <button className='button-general position-doctor-cancel' type='button'>
               Cancel
             </button>

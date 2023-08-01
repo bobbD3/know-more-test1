@@ -62,14 +62,18 @@ export const UsersProvider = ({ children }) => {
       console.log('Error DeleteUser: ', error)
     }
   }
-
-  const manageUser = async userData => {
-    try {
-      await axios.post(`${API_BASE_URL}da58acad-90ee-4e56-8757-106c9a96f71e`, userData)
-      fetchUsers() // Fetch users to update the local state after change
-    } catch (error) {
-      console.log('Error Manage User: ', error)
-    }
+  const manageUser = userData => {
+    return new Promise((resolve, reject) => {
+      axios
+        .post(`${API_BASE_URL}da58acad-90ee-4e56-8757-106c9a96f71e`, userData)
+        .then(res => {
+          resolve(res)
+        })
+        .catch(error => {
+          console.log('Error Manage User: ', error)
+          reject(error)
+        })
+    })
   }
 
   useEffect(() => {

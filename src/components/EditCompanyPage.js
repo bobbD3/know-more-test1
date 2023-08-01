@@ -3,7 +3,7 @@ import { Link, useParams, useNavigate } from 'react-router-dom'
 import { HospitalsContext } from '../contexts/HospitalsContext'
 
 const EditCompanyPage = () => {
-  const { hospitals, manageOrganization, doctors, patients } = useContext(HospitalsContext)
+  const { hospitals, manageOrganization, doctors, patients, selectedDoctors, selectedPatients, handleDoctorSelection, handlePatientSelection } = useContext(HospitalsContext)
 
   const [locationName, setLocationName] = useState('')
   const [address, setAddress] = useState('')
@@ -11,8 +11,8 @@ const EditCompanyPage = () => {
   const [zip, setZip] = useState('')
   const [phone, setPhone] = useState('')
   const [state, setState] = useState('')
-  const [selectedDoctors, setSelectedDoctors] = useState([])
-  const [selectedPatients, setSelectedPatients] = useState([])
+  // const [selectedDoctors, setSelectedDoctors] = useState([])
+  // const [selectedPatients, setSelectedPatients] = useState([])
 
   const navigate = useNavigate()
   // Get the id from the URL
@@ -31,10 +31,10 @@ const EditCompanyPage = () => {
       setCity(hospital.City || '')
       setZip(hospital.Zip || '')
       // Extract doctor and patient IDs
-      const doctorIds = hospital.Doctors
-      const patientIds = hospital.Patients
-      setSelectedDoctors(doctorIds)
-      setSelectedPatients(patientIds)
+      // const doctorIds = hospital.Doctors
+      // const patientIds = hospital.Patients
+      // setSelectedDoctors(doctorIds)
+      // setSelectedPatients(patientIds)
     } else {
       // If the hospital does not exist, reset all fields to their default values
       setLocationName('')
@@ -42,8 +42,8 @@ const EditCompanyPage = () => {
       setPhone('')
       setCity('')
       setZip('')
-      setSelectedDoctors([])
-      setSelectedPatients([])
+      // setSelectedDoctors([])
+      // setSelectedPatients([])
     }
   }, [OrganizationId, hospitals])
 
@@ -72,33 +72,40 @@ const EditCompanyPage = () => {
     navigate('/company')
   }
 
+  // const handleDoctorCheckboxChange = doctorId => {
+  //   setSelectedDoctors(prevSelectedDoctors => {
+  //     if (prevSelectedDoctors.includes(doctorId)) {
+  //       return prevSelectedDoctors.filter(Id => Id !== doctorId)
+  //     } else {
+  //       return [...prevSelectedDoctors, doctorId]
+  //     }
+  //   })
+  // }
+
+  // const handlePatientCheckboxChange = patientId => {
+  //   setSelectedPatients(prevSelectedPatients => {
+  //     // Here we clone the previous state to ensure that we are not mutating it directly.
+  //     let updatedSelectedPatients = [...prevSelectedPatients]
+
+  //     if (prevSelectedPatients.includes(patientId)) {
+  //       // If the patientId is already in the array, we remove it.
+  //       updatedSelectedPatients = updatedSelectedPatients.filter(Id => Id !== patientId)
+  //     } else {
+  //       // Otherwise, we add it.
+  //       updatedSelectedPatients.push(patientId)
+  //     }
+
+  //     return updatedSelectedPatients
+  //   })
+  // }
+
   const handleDoctorCheckboxChange = doctorId => {
-    setSelectedDoctors(prevSelectedDoctors => {
-      if (prevSelectedDoctors.includes(doctorId)) {
-        return prevSelectedDoctors.filter(Id => Id !== doctorId)
-      } else {
-        return [...prevSelectedDoctors, doctorId]
-      }
-    })
+    handleDoctorSelection(doctorId)
   }
 
   const handlePatientCheckboxChange = patientId => {
-    setSelectedPatients(prevSelectedPatients => {
-      // Here we clone the previous state to ensure that we are not mutating it directly.
-      let updatedSelectedPatients = [...prevSelectedPatients]
-
-      if (prevSelectedPatients.includes(patientId)) {
-        // If the patientId is already in the array, we remove it.
-        updatedSelectedPatients = updatedSelectedPatients.filter(Id => Id !== patientId)
-      } else {
-        // Otherwise, we add it.
-        updatedSelectedPatients.push(patientId)
-      }
-
-      return updatedSelectedPatients
-    })
+    handlePatientSelection(patientId)
   }
-
   if (!hospitals) return <div>Loading...</div>
 
   return (

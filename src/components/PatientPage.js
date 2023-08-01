@@ -110,7 +110,7 @@ const PatientPage = () => {
     console.log(userData)
     setFormState(initialFormState)
     fetchUsers()
-    navigate('/users')
+    navigate('/')
   }
 
   const doctors = users.filter(user => user.Role === 'Physician')
@@ -202,7 +202,7 @@ const PatientPage = () => {
           Send Invite
         </button>
         <div className='button-general-patient-container '>
-          <Link to='/users'>
+          <Link to='/'>
             <button className='button-general button-general-patient-cancel' type='button'>
               Cancel
             </button>

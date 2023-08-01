@@ -17,7 +17,7 @@ const NavBar = () => {
           </NavLink>
         </li> */}
         <li>
-          <NavLink to='/users' className={isActive('/users')}>
+          <NavLink to='/' className={isActive('/users')}>
             Users
           </NavLink>
         </li>
