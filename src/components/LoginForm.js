@@ -20,7 +20,7 @@ const LoginForm = ({ onLogin }) => {
       // Store login state in local storage
       localStorage.setItem('isLoggedIn', true)
 
-      // Redirect to the "/users" page after successful login
+      // Redirect to the "/" page after successful login
       navigate('/')
     } else {
       // Display an error message or perform other login failure logic

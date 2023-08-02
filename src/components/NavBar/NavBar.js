@@ -12,12 +12,12 @@ const NavBar = () => {
     <nav className='navBar'>
       <ul>
         {/* <li>
-          <NavLink to='/' className={isActive('/')}>
+          <NavLink to='/' className={isActive('/login')}>
             Login
           </NavLink>
         </li> */}
         <li>
-          <NavLink to='/' className={isActive('/users')}>
+          <NavLink to='/' className={isActive('/')}>
             Users
           </NavLink>
         </li>

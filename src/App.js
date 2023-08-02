@@ -12,15 +12,13 @@ import EditVideoPage from './components/EditVideoPage'
 import EditLibraryPage from './components/EditLibraryPage'
 import DoctorsPage from './components/DoctorsPage'
 import PatientPage from './components/PatientPage'
-import LibrariesContext from './contexts/LibrariesContext'
+import { LibrariesProvider } from './contexts/LibrariesContext'
 import { UsersProvider } from './contexts/UserContext'
 import { VideosProvider } from './contexts/VideosContext'
 import { HospitalsProvider } from './contexts/HospitalsContext'
-import dummyLibraries from './data/libraries'
 
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(localStorage.getItem('isLoggedIn') === 'true') // Check initial login status from local storage
-  const [libraries, setLibraries] = useState(dummyLibraries)
 
   useEffect(() => {
     localStorage.setItem('isLoggedIn', loggedIn)
@@ -34,7 +32,7 @@ const App = () => {
     <Router>
       <div>
         <NavBar />
-        <LibrariesContext.Provider value={{ libraries, setLibraries }}>
+        <LibrariesProvider>
           <HospitalsProvider>
             <VideosProvider>
               <UsersProvider>
@@ -65,7 +63,7 @@ const App = () => {
               </UsersProvider>
             </VideosProvider>
           </HospitalsProvider>
-        </LibrariesContext.Provider>
+        </LibrariesProvider>
       </div>
     </Router>
   )

@@ -9,7 +9,6 @@ export const UsersProvider = ({ children }) => {
   const [languages, setLanguages] = useState([])
   const [roles, setRoles] = useState([])
   const [loading, setLoading] = useState(true)
-  const [titles, setTitles] = useState([])
 
   const API_BASE_URL = 'https://knowmoreapp.azurewebsites.net/api-noauth/execute-sp/'
 
@@ -83,5 +82,5 @@ export const UsersProvider = ({ children }) => {
     fetchRoles()
   }, [])
 
-  return <UsersContext.Provider value={{ users, titles, loading, deleteUser, manageUser, states, languages, roles, fetchUsers }}>{children}</UsersContext.Provider>
+  return <UsersContext.Provider value={{ users, loading, deleteUser, manageUser, states, languages, roles, fetchUsers }}>{children}</UsersContext.Provider>
 }

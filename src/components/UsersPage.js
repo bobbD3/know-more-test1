@@ -1,17 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { UsersContext } from '../contexts/UserContext'
 import { Link, useNavigate } from 'react-router-dom'
-// import icon from '../images/Auction.svg'
 
 const UsersPage = () => {
   const { users: usersFromContext, loading, deleteUser } = useContext(UsersContext)
-  const [users, setUsers] = useState([]) // Local state to store users
+  const [users, setUsers] = useState([])
   console.log(users)
 
   const navigate = useNavigate()
 
   useEffect(() => {
-    setUsers(usersFromContext) // Update localUsers state whenever 'users' changes
+    setUsers(usersFromContext)
   }, [usersFromContext])
 
   const handleRemoveUser = async userId => {
@@ -52,10 +51,7 @@ const UsersPage = () => {
             <th>Address</th>
             <th>Email</th>
             <th>Mobile</th>
-            <th>
-              Accepted Terms
-              {/* <img src={icon} alt='icon' />{' '} */}
-            </th>
+            <th>Accepted Terms</th>
           </tr>
         </thead>
         <tbody>

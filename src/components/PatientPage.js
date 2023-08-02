@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { UsersContext } from '../contexts/UserContext'
-// import dummyUsers from '../data/data'
 
 const initialFormState = {
   id: Date.now(),
@@ -16,7 +15,8 @@ const initialFormState = {
   Email: '',
   mobile: '',
   confirmPolicy: 'No',
-  language: 'English'
+  language: 'English',
+  DoctorIds: []
 }
 
 const titles = ['Mr', 'Ms']
@@ -49,7 +49,7 @@ const PatientPage = () => {
         title: user.Title,
         firstName: user.FirstName,
         lastName: user.LastName,
-        role: role, // change this line
+        role: role,
         address1: user.Address,
         city: user.City,
         state: user.State,
@@ -57,7 +57,8 @@ const PatientPage = () => {
         Email: user.Email,
         mobile: user.MobilePhone,
         confirmPolicy: user.AcceptedTerms === 1 ? 'Yes' : 'No',
-        language: user.Language
+        language: user.Language,
+        DoctorIds: user.DoctorIds
       })
     }
   }, [user, roles])
@@ -70,6 +71,7 @@ const PatientPage = () => {
         return [...prevState, doctorId]
       }
     })
+    setFormState({ ...formState, DoctorIds: selectedDoctors })
   }
   const handleChange = event => {
     setFormState({ ...formState, [event.target.name]: event.target.value })
@@ -83,8 +85,8 @@ const PatientPage = () => {
 
     const userData = {
       UserId: formState.UserId,
-      RoleId: role?.RoleId, // use the RoleId of the role from context
-      LanguageId: language?.Id || 1, // use the Id of the language from context
+      RoleId: role?.RoleId,
+      LanguageId: language?.Id || 1,
       AcceptedTerms: formState.confirmPolicy === 'Yes' ? 1 : 0,
       FirstName: formState.firstName,
       LastName: formState.lastName,
@@ -92,11 +94,11 @@ const PatientPage = () => {
       MobilePhone: formState.mobile,
       Address: formState.address1,
       City: formState.city,
-      StateId: state?.Id, // use the Id of the state from context
+      StateId: state?.Id,
       Zip: formState.zip,
-      // OrganizationIds: selectedDoctors,
       OrganizationIds: [],
-      LibraryIds: formState.libraryIds || [] // Added logic for library Ids
+      LibraryIds: formState.libraryIds || [],
+      DoctorIds: formState.DoctorIds
     }
 
     if (user) {
@@ -183,9 +185,6 @@ const PatientPage = () => {
           </div>
           <div className='doctor_locations_list'>
             <div>Doctors</div>
-            {/* <button className='button-classic button-classic-doctors-add' type='button'>
-              Add
-            </button> */}
           </div>
           <div className='users_list_box'>
             {doctors.map((doctor, index) => (

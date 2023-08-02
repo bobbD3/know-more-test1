@@ -1,18 +1,18 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import { HospitalsContext } from '../contexts/HospitalsContext'
+import { UsersContext } from '../contexts/UserContext'
 
 const EditCompanyPage = () => {
   const { hospitals, manageOrganization, doctors, patients, selectedDoctors, selectedPatients, handleDoctorSelection, handlePatientSelection } = useContext(HospitalsContext)
+  const { states } = useContext(UsersContext)
 
   const [locationName, setLocationName] = useState('')
   const [address, setAddress] = useState('')
   const [city, setCity] = useState('')
   const [zip, setZip] = useState('')
   const [phone, setPhone] = useState('')
-  const [state, setState] = useState('')
-  // const [selectedDoctors, setSelectedDoctors] = useState([])
-  // const [selectedPatients, setSelectedPatients] = useState([])
+  const [selectedStateId, setSelectedStateId] = useState(null)
 
   const navigate = useNavigate()
   // Get the id from the URL
@@ -30,11 +30,6 @@ const EditCompanyPage = () => {
       setPhone(hospital.Phone || '')
       setCity(hospital.City || '')
       setZip(hospital.Zip || '')
-      // Extract doctor and patient IDs
-      // const doctorIds = hospital.Doctors
-      // const patientIds = hospital.Patients
-      // setSelectedDoctors(doctorIds)
-      // setSelectedPatients(patientIds)
     } else {
       // If the hospital does not exist, reset all fields to their default values
       setLocationName('')
@@ -42,8 +37,6 @@ const EditCompanyPage = () => {
       setPhone('')
       setCity('')
       setZip('')
-      // setSelectedDoctors([])
-      // setSelectedPatients([])
     }
   }, [OrganizationId, hospitals])
 
@@ -55,7 +48,7 @@ const EditCompanyPage = () => {
       Phone: phone,
       Address: address,
       City: city,
-      StateId: '', // TODO: add a state for StateId and map it with selected state
+      StateId: selectedStateId,
       Zip: zip,
       DoctorIds: selectedDoctors,
       PatientIds: selectedPatients
@@ -71,33 +64,6 @@ const EditCompanyPage = () => {
     manageOrganization(organizationData)
     navigate('/company')
   }
-
-  // const handleDoctorCheckboxChange = doctorId => {
-  //   setSelectedDoctors(prevSelectedDoctors => {
-  //     if (prevSelectedDoctors.includes(doctorId)) {
-  //       return prevSelectedDoctors.filter(Id => Id !== doctorId)
-  //     } else {
-  //       return [...prevSelectedDoctors, doctorId]
-  //     }
-  //   })
-  // }
-
-  // const handlePatientCheckboxChange = patientId => {
-  //   setSelectedPatients(prevSelectedPatients => {
-  //     // Here we clone the previous state to ensure that we are not mutating it directly.
-  //     let updatedSelectedPatients = [...prevSelectedPatients]
-
-  //     if (prevSelectedPatients.includes(patientId)) {
-  //       // If the patientId is already in the array, we remove it.
-  //       updatedSelectedPatients = updatedSelectedPatients.filter(Id => Id !== patientId)
-  //     } else {
-  //       // Otherwise, we add it.
-  //       updatedSelectedPatients.push(patientId)
-  //     }
-
-  //     return updatedSelectedPatients
-  //   })
-  // }
 
   const handleDoctorCheckboxChange = doctorId => {
     handleDoctorSelection(doctorId)
@@ -124,11 +90,19 @@ const EditCompanyPage = () => {
           <div className='company_form_dropdown_state'>
             <div>
               <div>State</div>
-              <select className='company_title_dropdown_state' name='state' value={state} onChange={event => setState(event.target.value)}>
-                <option value=''>Select State</option>
-                <option value='Alabama'>Alabama</option>
-                <option value='Alaska'>Alaska</option>
-                {/* Add more state options as needed */}
+              <select
+                className='company_title_dropdown_state'
+                onChange={event => {
+                  const selectedState = states.find(state => state.Name === event.target.value)
+                  setSelectedStateId(selectedState)
+                }}
+              >
+                {' '}
+                {states.map((state, index) => (
+                  <option value={state.Name} key={index}>
+                    {state.Name}
+                  </option>
+                ))}
               </select>
             </div>
             <div>
@@ -145,15 +119,6 @@ const EditCompanyPage = () => {
           {/* Doctors Information */}
           <div>Doctors Information</div>
           <div className='company_form_doctor_checkboxes'>
-            {/* {doctors.map(doctor => (
-              <div key={doctor.Id}>
-                <label>
-                  <input type='checkbox' checked={hospitals.Doctors.includes(doctor.Id)} onChange={() => handleDoctorCheckboxChange(doctor.Id)} />
-                  {`${doctor.FirstName} ${doctor.LastName}`}
-                </label>
-              </div>
-            ))} */}
-
             {doctors.map(doctor => (
               <div key={doctor.Id}>
                 <label>
@@ -167,15 +132,6 @@ const EditCompanyPage = () => {
           {/* Patients Information */}
           <div>Patients Information</div>
           <div className='company_form_patient_checkboxes'>
-            {/* {patients.map(patient => (
-              <div key={patient.Id}>
-                <label>
-                  <input type='checkbox' checked={hospitals.Patients.includes(patient.Id)} onChange={() => handlePatientCheckboxChange(patient.Id)} />
-                  {`${patient.FirstName} ${patient.LastName}`}
-                </label>
-              </div>
-            ))} */}
-
             {patients.map(patient => (
               <div key={patient.Id}>
                 <label>

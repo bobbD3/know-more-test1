@@ -3,8 +3,6 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { UsersContext } from '../contexts/UserContext'
 import { HospitalsContext } from '../contexts/HospitalsContext'
 
-// import dummyHospitals from '../data/hospitals'
-
 const initialFormState = {
   id: Date.now(),
   title: '',
@@ -17,13 +15,11 @@ const initialFormState = {
   zip: '',
   Email: '',
   mobile: '',
-  confirmEmail: 'No',
-  confirmPhone: 'No',
   confirmPolicy: 'No',
-  language: 'English',
-  SSOID: ''
+  language: 'English'
 }
 
+console.log(initialFormState)
 const titles = ['Mr', 'Ms', 'Dr']
 const confirmationOptions = ['Yes', 'No']
 const library = ['New Library 1	', 'New Library 2', 'New Library 3']
@@ -55,19 +51,19 @@ const DoctorPage = () => {
         title: user.Title,
         firstName: user.FirstName,
         lastName: user.LastName,
-        role: role, // change this line
+        role: role,
         address1: user.Address,
         city: user.City,
         state: user.State,
         zip: user.Zip,
         Email: user.Email,
         mobile: user.MobilePhone,
-        confirmPolicy: user.HasAcceptedTerms === 1 ? 'Yes' : 'No',
+        confirmPolicy: user.AcceptedTerms === 1 ? 'Yes' : 'No',
         language: user.Language,
         SSOID: user.SSOID
       })
 
-      setSelectedHospitals(user.OrganizationIds || []) // Set selected hospitals to the user's organizations
+      setSelectedHospitals(user.OrganizationIds || [])
     }
   }, [user, roles])
 
@@ -95,7 +91,7 @@ const DoctorPage = () => {
       UserId: formState.UserId,
       RoleId: role?.RoleId,
       LanguageId: language?.Id || 1,
-      HasAcceptedTerms: formState.confirmPolicy === 'Yes' ? 1 : 0,
+      AcceptedTerms: formState.confirmPolicy === 'Yes' ? 1 : 0,
       FirstName: formState.firstName,
       LastName: formState.lastName,
       Email: formState.Email,
@@ -104,7 +100,7 @@ const DoctorPage = () => {
       City: formState.city,
       StateId: state?.Id,
       Zip: formState.zip,
-      OrganizationIds: selectedHospitals, // add selectedHospitals here
+      OrganizationIds: selectedHospitals,
       LibraryIds: []
     }
 
@@ -192,9 +188,6 @@ const DoctorPage = () => {
           </div>
           <div className='doctor_locations_list'>
             <div>Organization</div>
-            {/* <button className='button-classic button-classic-doctors-add' type='button'>
-              Add
-            </button> */}
           </div>
           <div className='users_list_box'>
             {hospitals.map((hospital, index) => (
