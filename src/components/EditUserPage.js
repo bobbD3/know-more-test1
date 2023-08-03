@@ -52,7 +52,7 @@ const EditUserPage = () => {
   }
 
   return (
-    <div className='edit-user-container'>
+    <div className='edit_user_container'>
       <h2>Edit User</h2>
       <form className='edit-user-form' onSubmit={handleSubmit}>
         {Object.keys(formState).map(key => (

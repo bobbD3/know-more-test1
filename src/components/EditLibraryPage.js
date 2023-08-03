@@ -113,7 +113,7 @@ const EditLibraryPage = () => {
   }
 
   return (
-    <div className='library-edit-add-container'>
+    <div className='library_edit_add_container'>
       {/* <h2>{id ? 'Edit' : 'Add'} Library</h2> */}
       <div className='library-edit-label'>
         <label>Program Package Name:</label>
@@ -122,10 +122,10 @@ const EditLibraryPage = () => {
       <button className='button-classic button-edit-library-add' onClick={handleAddPackage}>
         Add Category
       </button>
-      <div className='videos-container'>
+      <div className='videos_container'>
         {videoPackages.map((videoPackage, packageIndex) => (
           <div key={packageIndex}>
-            <div className='library-edit-label-package'>
+            <div className='library_edit_label_package'>
               <div>
                 <input type='text' placeholder='Name your category' />
               </div>
@@ -169,11 +169,11 @@ const EditLibraryPage = () => {
       </button>
       <ReactModal isOpen={modalIsOpen}>
         <h2>Select a Program</h2>
-        <div className='modal-library-add-video-container'>
+        <div className='modal_library_add_video_container'>
           {contextVideos.map(video => (
             <div
               key={video.id}
-              className='video-thumbnail-container-modal'
+              className='video_thumbnail_container_modal'
               style={{
                 backgroundImage: `url(${video.languages[0].thumbnail})`,
                 width: '200px',

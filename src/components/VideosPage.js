@@ -29,7 +29,7 @@ const VideoPage = () => {
             video.languages.slice(0, 1).map((lang, index) => (
               <tr key={index}>
                 <td>
-                  <div className='video-thumbnail-container' style={{ backgroundImage: `url(${lang.thumbnail})`, width: '135px', height: '75px' }}></div>
+                  <div className='video_thumbnail_container' style={{ backgroundImage: `url(${lang.thumbnail})`, width: '135px', height: '75px' }}></div>
                 </td>
                 <td>{video.videoName}</td>
                 {/* <td>{lang.language}</td>

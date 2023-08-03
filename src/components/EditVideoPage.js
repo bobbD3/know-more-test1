@@ -68,17 +68,17 @@ const VideoAddEditPage = () => {
   }
 
   return (
-    <form className='video-container' onSubmit={handleFormSubmit}>
-      <div className='video-form'>
-        <div className='video-edit-label'>
+    <form className='video_container' onSubmit={handleFormSubmit}>
+      <div className='video_form'>
+        <div className='video_edit_label'>
           <div>
-            <label className='video-edit-label-name'>
+            <label className='video_edit_label_name'>
               Program Name:
               <input type='text' name='videoName' value={videoName} onChange={e => setVideoName(e.target.value)} />
             </label>
           </div>
           <div>
-            <label className='video-edit-label-prescribed'>
+            <label className='video_edit_label_prescribed'>
               Prescribed:
               <select name='prescribed' value={prescribed} onChange={e => setPrescribed(e.target.value)}>
                 <option value={true}>Yes</option>
@@ -93,12 +93,12 @@ const VideoAddEditPage = () => {
       </div>
       <div className='video_edit_veritcal_scroll'>
         {languages.map((language, index) => (
-          <div className='video-form-scroll' key={index}>
-            <div className='thumbnail-upload'>
+          <div className='video_form_scroll' key={index}>
+            <div className='thumbnail_upload'>
               <div className='thumnail-holder'>
                 <label>
                   <div className='button-classic-thumbnail video-thumbnail-holder-upload'>Upload</div>
-                  <div className='video-thumbnail-holder'>Thumbnail</div>
+                  <div className='video_thumbnail_holder'>Thumbnail</div>
                   <input type='file' style={{ display: 'none' }} onChange={e => handleFileChange(e, index, 'thumbnail')} />
                   {language.thumbnailName ? language.thumbnailName.substring(0, 8) : ' '}
                 </label>
@@ -108,14 +108,14 @@ const VideoAddEditPage = () => {
               <div className='thumnail-holder'>
                 <label>
                   <div className='button-classic-thumbnail video-thumbnail-holder-upload'>Upload</div>
-                  <div className='video-video-holder'>Program</div>
+                  <div className='video_video_holder'>Program</div>
                   <input type='file' style={{ display: 'none' }} onChange={e => handleFileChange(e, index, 'videoFile')} />
                   {language.videoFileName ? language.videoFileName.substring(0, 8) : ' '}
                 </label>
               </div>
             </div>
             <div>
-              <label className='video-edit-label-column'>
+              <label className='video_edit_label_column'>
                 Language:
                 <select name='language' value={language.language} onChange={e => handleInputChange(e, index)}>
                   <option value=''>Select a language</option>
@@ -125,26 +125,22 @@ const VideoAddEditPage = () => {
                   <option value='German'>German</option>
                 </select>
               </label>
-              <label className='video-edit-label-column'>
+              <label className='video_edit_label_column'>
                 Owner:
                 <input type='text' name='videoURL' />
               </label>
             </div>
             <div>
-              {/* <label className='video-edit-label-url'>
-                Video URL:
-                <input type='text' name='videoURL' value={language.videoURL} onChange={e => handleInputChange(e, index)} />
-              </label> */}
-              <label className='video-edit-label-url'>
+              <label className='video_edit_label_url'>
                 Tags
                 <input type='text' name='Tags' />
               </label>
               <div>
-                <label className='video-edit-label-url '>
+                <label className='video_edit_label_url '>
                   Closed Caption
-                  <div className='video-closed-caption'>
-                    <input className='video-cc-edit-label-url-input' type='file' style={{ display: 'none' }} onChange={e => handleFileChange(e, index, 'closedCaption')} />
-                    <input className='video-cc-edit-label-url-input' type='text' name='closedCaptionName' value={language.closedCaptionName || ''} disabled />
+                  <div className='video_closed_caption'>
+                    <input className='video_cc_edit_label_url_input' type='file' style={{ display: 'none' }} onChange={e => handleFileChange(e, index, 'closedCaption')} />
+                    <input className='video_cc_edit_label_url_input' type='text' name='closedCaptionName' value={language.closedCaptionName || ''} disabled />
                     <button className='button-classic video-cc-edit-label-url-input-button ' type='button' onClick={() => document.getElementsByName('closedCaptionName')[index].previousSibling.click()}>
                       Upload
                     </button>
@@ -152,11 +148,11 @@ const VideoAddEditPage = () => {
                 </label>
               </div>
             </div>
-            <div className='video-edit-label-url '>
+            <div className='video_edit_label_url '>
               Description
               <textarea className='video-descripiton'></textarea>
             </div>
-            <label className='video-edit-label-prescribed'>
+            <label className='video_edit_label_prescribed'>
               Status:
               {/* <select name='status' value={language.status} onChange={e => handleInputChange(e, index)}>
                 <option value='Inactive'>Inactive</option>

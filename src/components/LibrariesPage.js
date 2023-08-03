@@ -19,14 +19,14 @@ const LibrariesPage = () => {
         <tbody>
           {libraries.map(library => {
             return (
-              <tr className='library-td-possition' key={library.id}>
+              <tr className='library_td_possition' key={library.id}>
                 <td>{library.library}</td>
-                <td className='library-add-button-possition-edit'>
+                <td className='library_add_button_possition_edit'>
                   <Link to={`/edit-library/${library.id}`}>
                     <button className='button-classic'>Edit Package</button>
                   </Link>
                 </td>
-                <td className='user-add-button-possition-remove'>
+                <td className='library_add_button_possition_remove'>
                   <button className='button-classic' onClick={() => removeLibrary(library.id)}>
                     Remove
                   </button>
